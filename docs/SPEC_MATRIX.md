@@ -25,6 +25,7 @@ families and workflow; later milestones must pin exact revisions in
 | Node-to-client protocols | optional planned | `ouroboros-network` and `cardano-node` revisions must be pinned |
 | Node-to-node protocols | optional planned | `ouroboros-network` revisions must be pinned |
 | Query/submit transport | optional planned | Trust model and redaction policy must be documented before admission |
+| Sanitization | boundary planned | `cardano-valkyoth-sanitization` exists as a first-party secret-bearing data boundary |
 | Signer APIs | optional planned | External-signer-first policy must be documented before admission |
 | Fuzz harness | planned | Fuzz workspace is present; parser-specific targets are added with parser milestones |
 | Formal verification | planned | Kani harness planned as extra assurance before `1.0.0` |

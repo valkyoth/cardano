@@ -27,6 +27,7 @@ Status: `v0.1.0` repository foundation scaffold.
 | `cardano-valkyoth-governance` | `0.1.0` | code | yes | Initial Conway governance crate boundary. |
 | `cardano-valkyoth-node` | `0.1.0` | code | yes | Initial node protocol boundary crate. |
 | `cardano-valkyoth-rpc` | `0.1.0` | code | yes | Initial query/submit trust-policy crate. |
+| `cardano-valkyoth-sanitization` | `0.1.0` | code | yes | Initial secret-bearing data sanitization crate boundary. |
 | `cardano-valkyoth-signer` | `0.1.0` | code | yes | Initial external-signer-first crate boundary. |
 | `cardano-valkyoth-testkit` | `0.1.0` | code | yes | Initial fixture and adversarial-test crate boundary. |
 | `cardano` | `0.1.0` | code | yes | Initial facade crate. |

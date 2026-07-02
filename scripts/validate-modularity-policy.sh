@@ -23,5 +23,6 @@ grep -q '"crates/cardano-valkyoth-script"' Cargo.toml
 grep -q '"crates/cardano-valkyoth-governance"' Cargo.toml
 grep -q '"crates/cardano-valkyoth-node"' Cargo.toml
 grep -q '"crates/cardano-valkyoth-rpc"' Cargo.toml
+grep -q '"crates/cardano-valkyoth-sanitization"' Cargo.toml
 grep -q '"crates/cardano-valkyoth-signer"' Cargo.toml
 grep -q '"crates/cardano-valkyoth-testkit"' Cargo.toml

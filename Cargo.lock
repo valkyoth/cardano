@@ -39,6 +39,10 @@ name = "cardano-valkyoth-rpc"
 version = "0.1.0"
 
 [[package]]
+name = "cardano-valkyoth-sanitization"
+version = "0.1.0"
+
+[[package]]
 name = "cardano-valkyoth-script"
 version = "0.1.0"
 

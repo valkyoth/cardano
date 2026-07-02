@@ -9,6 +9,7 @@ members = [
     "crates/cardano-valkyoth-node",
     "crates/cardano-valkyoth-primitives",
     "crates/cardano-valkyoth-rpc",
+    "crates/cardano-valkyoth-sanitization",
     "crates/cardano-valkyoth-script",
     "crates/cardano-valkyoth-signer",
     "crates/cardano-valkyoth-testkit",
@@ -50,6 +51,7 @@ cardano-valkyoth-ledger = { path = "crates/cardano-valkyoth-ledger", version = "
 cardano-valkyoth-node = { path = "crates/cardano-valkyoth-node", version = "0.1.0" }
 cardano-valkyoth-primitives = { path = "crates/cardano-valkyoth-primitives", version = "0.1.0" }
 cardano-valkyoth-rpc = { path = "crates/cardano-valkyoth-rpc", version = "0.1.0" }
+cardano-valkyoth-sanitization = { path = "crates/cardano-valkyoth-sanitization", version = "0.1.0" }
 cardano-valkyoth-script = { path = "crates/cardano-valkyoth-script", version = "0.1.0" }
 cardano-valkyoth-signer = { path = "crates/cardano-valkyoth-signer", version = "0.1.0" }
 cardano-valkyoth-testkit = { path = "crates/cardano-valkyoth-testkit", version = "0.1.0" }

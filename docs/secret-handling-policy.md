@@ -17,7 +17,9 @@ Rules:
 - Error messages and logs must not include secret-bearing bytes.
 - Query and submit adapters must redact endpoint credentials and raw signed
   transactions by default.
-- Any future sanitization support stays outside the default dependency graph.
+- `cardano-valkyoth-sanitization` owns first-party redaction and sanitization
+  helpers.
+- Sanitization support stays outside the default dependency graph.
 
 Public values such as addresses, transaction ids, block hashes, and policy ids
 are not secret-bearing by themselves, but they may still be sensitive in

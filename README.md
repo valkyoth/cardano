@@ -49,7 +49,8 @@ Implemented now:
 - Official-source workflow for `cardano-ledger`, `cardano-node`,
   `ouroboros-network`, and CIPs.
 - Initial crate boundaries for primitives, CBOR, crypto, addresses, ledger,
-  scripts, governance, node, RPC, signer, testkit, and the `cardano` facade.
+  scripts, governance, node, RPC, sanitization, signer, testkit, and the
+  `cardano` facade.
 
 Not implemented yet:
 
@@ -95,6 +96,7 @@ cardano = "0.1"
 | `std` | no | Enables `std` support in admitted core crates. |
 | `node` | no | Future node-to-client and node-to-node protocol boundary. |
 | `rpc` | no | Future query/submit trust-policy boundary. |
+| `sanitization` | no | Future secret-bearing data sanitization bridge APIs. |
 | `signer` | no | Future signer isolation boundary. |
 | `testkit` | no | Test fixtures, conformance helpers, and adversarial inputs. |
 

@@ -37,6 +37,7 @@ def test_publish_order_contains_cardano_packages() -> None:
         "cardano-valkyoth-governance",
         "cardano-valkyoth-node",
         "cardano-valkyoth-rpc",
+        "cardano-valkyoth-sanitization",
         "cardano-valkyoth-signer",
         "cardano-valkyoth-testkit",
         "cardano",

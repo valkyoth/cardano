@@ -66,6 +66,8 @@ The first production value is:
 - `cardano-valkyoth-node`: optional node-to-client and node-to-node protocol
   type and state-machine boundaries.
 - `cardano-valkyoth-rpc`: optional query/submit policy over admitted transports.
+- `cardano-valkyoth-sanitization`: optional redaction and sanitization boundary
+  for secret-bearing Cardano data.
 - `cardano-valkyoth-signer`: optional signer isolation and domain-specific
   signing APIs.
 - `cardano-valkyoth-testkit`: fixtures, adversarial inputs, conformance helpers,

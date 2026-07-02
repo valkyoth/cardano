@@ -21,6 +21,7 @@ for package in \
     cardano-valkyoth-governance \
     cardano-valkyoth-node \
     cardano-valkyoth-rpc \
+    cardano-valkyoth-sanitization \
     cardano-valkyoth-signer \
     cardano-valkyoth-testkit \
     cardano; do

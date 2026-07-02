@@ -64,6 +64,13 @@ change = "code"
 publish = true
 reason = "Initial query/submit trust-policy crate."
 
+[crates.cardano-valkyoth-sanitization]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial secret-bearing data sanitization crate boundary."
+
 [crates.cardano-valkyoth-signer]
 previous_version = "0.0.0"
 version = "0.1.0"
