@@ -8,6 +8,8 @@ Status: implementation stop reached; waiting for pentest.
 - Harden release-readiness diagnostics for permanent pentest report metadata.
 - Add negative release-readiness tests for non-PASS status and blank tester
   fields.
+- Harden the GitHub Actions spec-lock check by passing pull-request base refs
+  through an environment variable before shell use.
 - Publish only the `cardano` facade crate at `0.2.0` so crates.io shows the
   repository README for the current release.
 
@@ -16,6 +18,9 @@ Status: implementation stop reached; waiting for pentest.
 - No Cardano protocol parser, signer, local key storage, network transport,
   Plutus execution, wallet behavior, or ledger validation is implemented in
   this release.
+- The v0.2.0 scratch pentest found a low-risk GitHub Actions
+  template-injection anti-pattern in the spec-lock check; this release fixes
+  that workflow step before tag readiness.
 - The release gate continues to require `scripts/checks.sh`, `cargo deny
   check`, `cargo audit`, SBOM generation, release notes, and a permanent
   pentest report before a tag-ready claim.

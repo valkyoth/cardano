@@ -42,7 +42,9 @@ jobs:
 
       - name: Check protocol spec lock policy
         if: github.event_name == 'pull_request'
-        run: scripts/validate-spec-lock-policy.sh check-changed "origin/${{ github.base_ref }}"
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: scripts/validate-spec-lock-policy.sh check-changed "origin/${BASE_REF}"
 
       - name: Check dependency policy
         run: cargo deny check
