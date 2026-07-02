@@ -1,18 +1,17 @@
 # Pinned upstream specification and fixture revisions.
 #
-# v0.1.0 establishes the source-check workflow only. Protocol milestones must
-# pin exact upstream revisions before implementing consensus-sensitive Cardano
-# behavior.
+# v0.3.0 pins official source revisions before introducing Cardano primitive
+# protocol domains.
 
 [cardano]
-spec_required = false
+spec_required = true
 ledger_repo = "https://github.com/IntersectMBO/cardano-ledger"
-ledger_rev = ""
+ledger_rev = "7903c0074df4ecc2d96b780ca4e5299d2b866553"
 node_repo = "https://github.com/IntersectMBO/cardano-node"
-node_rev = ""
+node_rev = "4fa3e6c4143df1f17aac9e114517e18f3b775934"
 ouroboros_network_repo = "https://github.com/IntersectMBO/ouroboros-network"
-ouroboros_network_rev = ""
+ouroboros_network_rev = "b47dbc2c29108e593cc47524cffb75008b88fe90"
 cips_repo = "https://github.com/cardano-foundation/CIPs"
-cips_rev = ""
+cips_rev = "20c819b25abee6551a3ef51778b975e7463e1269"
 local_reference_store_env = "CARDANO_REFERENCE_STORE"
 local_reference_store_default = "../../test/cardano"

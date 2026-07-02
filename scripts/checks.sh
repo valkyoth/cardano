@@ -26,7 +26,12 @@ for package in \
     cardano-valkyoth-signer \
     cardano-valkyoth-testkit \
     cardano; do
-    cargo package -p "$package" --allow-dirty
+    if [ "$package" = "cardano" ]; then
+        cargo package -p "$package" --allow-dirty \
+            --config 'patch.crates-io.cardano-valkyoth-primitives.path="crates/cardano-valkyoth-primitives"'
+    else
+        cargo package -p "$package" --allow-dirty
+    fi
 done
 cargo clippy --workspace --all-targets --all-features -- -D warnings
 cargo test --workspace --all-features

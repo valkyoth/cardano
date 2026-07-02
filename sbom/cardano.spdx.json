@@ -1,20 +1,20 @@
 {
   "SPDXID": "SPDXRef-DOCUMENT",
   "creationInfo": {
-    "created": "2026-07-02T08:50:54Z",
+    "created": "2026-07-02T09:33:36Z",
     "creators": [
       "Tool: cargo-sbom-v0.10.0"
     ]
   },
   "dataLicense": "CC0-1.0",
-  "documentNamespace": "https://spdx.org/spdxdocs/cardano-b1370e74-c8c2-4772-bb8f-1b9ead985233",
+  "documentNamespace": "https://spdx.org/spdxdocs/cardano-acdf75b2-d17d-4914-b0b4-88357a29e24d",
   "files": [
     {
       "SPDXID": "SPDXRef-File-cardano",
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -28,7 +28,7 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -42,7 +42,7 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -56,7 +56,7 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -70,7 +70,7 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -84,7 +84,7 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -98,7 +98,7 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -112,7 +112,7 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -126,7 +126,7 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -140,7 +140,7 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -154,7 +154,7 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -168,7 +168,7 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -182,7 +182,7 @@
       "checksums": [
         {
           "algorithm": "SHA1",
-          "checksumValue": "d5f5c78638564630ce7a7e04bb0fec1eed3e42b5"
+          "checksumValue": "e011d5987b866d39c09d1bcf6ef1dc4a0f65d517"
         }
       ],
       "fileName": "./Cargo.lock",
@@ -195,14 +195,114 @@
   "name": "cardano",
   "packages": [
     {
-      "SPDXID": "SPDXRef-Package-cardano-0.2.0",
+      "SPDXID": "SPDXRef-Package-cardano-valkyoth-sanitization-0.1.0",
+      "description": "Cardano secret-bearing data sanitization boundary.",
+      "downloadLocation": "NONE",
+      "homepage": "https://github.com/valkyoth/cardano",
+      "licenseConcluded": "MIT OR Apache-2.0",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "name": "cardano-valkyoth-sanitization",
+      "versionInfo": "0.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cardano-valkyoth-script-0.1.0",
+      "description": "Cardano script boundary.",
+      "downloadLocation": "NONE",
+      "homepage": "https://github.com/valkyoth/cardano",
+      "licenseConcluded": "MIT OR Apache-2.0",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "name": "cardano-valkyoth-script",
+      "versionInfo": "0.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cardano-valkyoth-address-0.1.0",
+      "description": "Cardano address boundary.",
+      "downloadLocation": "NONE",
+      "homepage": "https://github.com/valkyoth/cardano",
+      "licenseConcluded": "MIT OR Apache-2.0",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "name": "cardano-valkyoth-address",
+      "versionInfo": "0.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cardano-valkyoth-signer-0.1.0",
+      "description": "Cardano signer isolation boundary.",
+      "downloadLocation": "NONE",
+      "homepage": "https://github.com/valkyoth/cardano",
+      "licenseConcluded": "MIT OR Apache-2.0",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "name": "cardano-valkyoth-signer",
+      "versionInfo": "0.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cardano-valkyoth-primitives-0.2.0",
+      "description": "Cardano primitive domain boundaries.",
+      "downloadLocation": "NONE",
+      "homepage": "https://github.com/valkyoth/cardano",
+      "licenseConcluded": "MIT OR Apache-2.0",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "name": "cardano-valkyoth-primitives",
+      "versionInfo": "0.2.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cardano-valkyoth-testkit-0.1.0",
+      "description": "Cardano fixtures and adversarial test helpers.",
+      "downloadLocation": "NONE",
+      "homepage": "https://github.com/valkyoth/cardano",
+      "licenseConcluded": "MIT OR Apache-2.0",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "name": "cardano-valkyoth-testkit",
+      "versionInfo": "0.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cardano-0.3.0",
       "description": "no_std-first Cardano protocol building blocks for Rust.",
       "downloadLocation": "NONE",
       "homepage": "https://github.com/valkyoth/cardano",
       "licenseConcluded": "MIT OR Apache-2.0",
       "licenseDeclared": "MIT OR Apache-2.0",
       "name": "cardano",
-      "versionInfo": "0.2.0"
+      "versionInfo": "0.3.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cardano-valkyoth-ledger-0.1.0",
+      "description": "Era-aware Cardano ledger boundary.",
+      "downloadLocation": "NONE",
+      "homepage": "https://github.com/valkyoth/cardano",
+      "licenseConcluded": "MIT OR Apache-2.0",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "name": "cardano-valkyoth-ledger",
+      "versionInfo": "0.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cardano-valkyoth-governance-0.1.0",
+      "description": "Cardano governance boundary.",
+      "downloadLocation": "NONE",
+      "homepage": "https://github.com/valkyoth/cardano",
+      "licenseConcluded": "MIT OR Apache-2.0",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "name": "cardano-valkyoth-governance",
+      "versionInfo": "0.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cardano-valkyoth-crypto-0.1.0",
+      "description": "Cardano cryptographic trait boundaries.",
+      "downloadLocation": "NONE",
+      "homepage": "https://github.com/valkyoth/cardano",
+      "licenseConcluded": "MIT OR Apache-2.0",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "name": "cardano-valkyoth-crypto",
+      "versionInfo": "0.1.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-cardano-valkyoth-node-0.1.0",
+      "description": "Cardano node protocol boundary.",
+      "downloadLocation": "NONE",
+      "homepage": "https://github.com/valkyoth/cardano",
+      "licenseConcluded": "MIT OR Apache-2.0",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "name": "cardano-valkyoth-node",
+      "versionInfo": "0.1.0"
     },
     {
       "SPDXID": "SPDXRef-Package-cardano-valkyoth-cbor-0.1.0",
@@ -223,139 +323,9 @@
       "licenseDeclared": "MIT OR Apache-2.0",
       "name": "cardano-valkyoth-rpc",
       "versionInfo": "0.1.0"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-cardano-valkyoth-script-0.1.0",
-      "description": "Cardano script boundary.",
-      "downloadLocation": "NONE",
-      "homepage": "https://github.com/valkyoth/cardano",
-      "licenseConcluded": "MIT OR Apache-2.0",
-      "licenseDeclared": "MIT OR Apache-2.0",
-      "name": "cardano-valkyoth-script",
-      "versionInfo": "0.1.0"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-cardano-valkyoth-primitives-0.1.0",
-      "description": "Cardano primitive domain boundaries.",
-      "downloadLocation": "NONE",
-      "homepage": "https://github.com/valkyoth/cardano",
-      "licenseConcluded": "MIT OR Apache-2.0",
-      "licenseDeclared": "MIT OR Apache-2.0",
-      "name": "cardano-valkyoth-primitives",
-      "versionInfo": "0.1.0"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-cardano-valkyoth-governance-0.1.0",
-      "description": "Cardano governance boundary.",
-      "downloadLocation": "NONE",
-      "homepage": "https://github.com/valkyoth/cardano",
-      "licenseConcluded": "MIT OR Apache-2.0",
-      "licenseDeclared": "MIT OR Apache-2.0",
-      "name": "cardano-valkyoth-governance",
-      "versionInfo": "0.1.0"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-cardano-valkyoth-testkit-0.1.0",
-      "description": "Cardano fixtures and adversarial test helpers.",
-      "downloadLocation": "NONE",
-      "homepage": "https://github.com/valkyoth/cardano",
-      "licenseConcluded": "MIT OR Apache-2.0",
-      "licenseDeclared": "MIT OR Apache-2.0",
-      "name": "cardano-valkyoth-testkit",
-      "versionInfo": "0.1.0"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-cardano-valkyoth-node-0.1.0",
-      "description": "Cardano node protocol boundary.",
-      "downloadLocation": "NONE",
-      "homepage": "https://github.com/valkyoth/cardano",
-      "licenseConcluded": "MIT OR Apache-2.0",
-      "licenseDeclared": "MIT OR Apache-2.0",
-      "name": "cardano-valkyoth-node",
-      "versionInfo": "0.1.0"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-cardano-valkyoth-signer-0.1.0",
-      "description": "Cardano signer isolation boundary.",
-      "downloadLocation": "NONE",
-      "homepage": "https://github.com/valkyoth/cardano",
-      "licenseConcluded": "MIT OR Apache-2.0",
-      "licenseDeclared": "MIT OR Apache-2.0",
-      "name": "cardano-valkyoth-signer",
-      "versionInfo": "0.1.0"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-cardano-valkyoth-address-0.1.0",
-      "description": "Cardano address boundary.",
-      "downloadLocation": "NONE",
-      "homepage": "https://github.com/valkyoth/cardano",
-      "licenseConcluded": "MIT OR Apache-2.0",
-      "licenseDeclared": "MIT OR Apache-2.0",
-      "name": "cardano-valkyoth-address",
-      "versionInfo": "0.1.0"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-cardano-valkyoth-crypto-0.1.0",
-      "description": "Cardano cryptographic trait boundaries.",
-      "downloadLocation": "NONE",
-      "homepage": "https://github.com/valkyoth/cardano",
-      "licenseConcluded": "MIT OR Apache-2.0",
-      "licenseDeclared": "MIT OR Apache-2.0",
-      "name": "cardano-valkyoth-crypto",
-      "versionInfo": "0.1.0"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-cardano-valkyoth-sanitization-0.1.0",
-      "description": "Cardano secret-bearing data sanitization boundary.",
-      "downloadLocation": "NONE",
-      "homepage": "https://github.com/valkyoth/cardano",
-      "licenseConcluded": "MIT OR Apache-2.0",
-      "licenseDeclared": "MIT OR Apache-2.0",
-      "name": "cardano-valkyoth-sanitization",
-      "versionInfo": "0.1.0"
-    },
-    {
-      "SPDXID": "SPDXRef-Package-cardano-valkyoth-ledger-0.1.0",
-      "description": "Era-aware Cardano ledger boundary.",
-      "downloadLocation": "NONE",
-      "homepage": "https://github.com/valkyoth/cardano",
-      "licenseConcluded": "MIT OR Apache-2.0",
-      "licenseDeclared": "MIT OR Apache-2.0",
-      "name": "cardano-valkyoth-ledger",
-      "versionInfo": "0.1.0"
     }
   ],
   "relationships": [
-    {
-      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-script-0.1.0",
-      "relationshipType": "GENERATED_FROM",
-      "spdxElementId": "SPDXRef-File-cardano_valkyoth_script"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-address-0.1.0",
-      "relationshipType": "GENERATED_FROM",
-      "spdxElementId": "SPDXRef-File-cardano_valkyoth_address"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_primitives",
-      "relationshipType": "DESCRIBES",
-      "spdxElementId": "SPDXRef-DOCUMENT"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_signer",
-      "relationshipType": "DESCRIBES",
-      "spdxElementId": "SPDXRef-DOCUMENT"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_address",
-      "relationshipType": "DESCRIBES",
-      "spdxElementId": "SPDXRef-DOCUMENT"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-cardano-0.2.0",
-      "relationshipType": "GENERATED_FROM",
-      "spdxElementId": "SPDXRef-File-cardano"
-    },
     {
       "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-governance-0.1.0",
       "relationshipType": "GENERATED_FROM",
@@ -367,7 +337,77 @@
       "spdxElementId": "SPDXRef-DOCUMENT"
     },
     {
+      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_address",
+      "relationshipType": "DESCRIBES",
+      "spdxElementId": "SPDXRef-DOCUMENT"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_primitives",
+      "relationshipType": "DESCRIBES",
+      "spdxElementId": "SPDXRef-DOCUMENT"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_rpc",
+      "relationshipType": "DESCRIBES",
+      "spdxElementId": "SPDXRef-DOCUMENT"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-script-0.1.0",
+      "relationshipType": "GENERATED_FROM",
+      "spdxElementId": "SPDXRef-File-cardano_valkyoth_script"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_cbor",
+      "relationshipType": "DESCRIBES",
+      "spdxElementId": "SPDXRef-DOCUMENT"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-primitives-0.2.0",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Package-cardano-0.3.0"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-testkit-0.1.0",
+      "relationshipType": "GENERATED_FROM",
+      "spdxElementId": "SPDXRef-File-cardano_valkyoth_testkit"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-crypto-0.1.0",
+      "relationshipType": "GENERATED_FROM",
+      "spdxElementId": "SPDXRef-File-cardano_valkyoth_crypto"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-ledger-0.1.0",
+      "relationshipType": "GENERATED_FROM",
+      "spdxElementId": "SPDXRef-File-cardano_valkyoth_ledger"
+    },
+    {
       "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_ledger",
+      "relationshipType": "DESCRIBES",
+      "spdxElementId": "SPDXRef-DOCUMENT"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-node-0.1.0",
+      "relationshipType": "GENERATED_FROM",
+      "spdxElementId": "SPDXRef-File-cardano_valkyoth_node"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-cbor-0.1.0",
+      "relationshipType": "GENERATED_FROM",
+      "spdxElementId": "SPDXRef-File-cardano_valkyoth_cbor"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-signer-0.1.0",
+      "relationshipType": "GENERATED_FROM",
+      "spdxElementId": "SPDXRef-File-cardano_valkyoth_signer"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-address-0.1.0",
+      "relationshipType": "GENERATED_FROM",
+      "spdxElementId": "SPDXRef-File-cardano_valkyoth_address"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_sanitization",
       "relationshipType": "DESCRIBES",
       "spdxElementId": "SPDXRef-DOCUMENT"
     },
@@ -377,12 +417,17 @@
       "spdxElementId": "SPDXRef-File-cardano_valkyoth_rpc"
     },
     {
-      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_rpc",
+      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-sanitization-0.1.0",
+      "relationshipType": "GENERATED_FROM",
+      "spdxElementId": "SPDXRef-File-cardano_valkyoth_sanitization"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_signer",
       "relationshipType": "DESCRIBES",
       "spdxElementId": "SPDXRef-DOCUMENT"
     },
     {
-      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_sanitization",
+      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_node",
       "relationshipType": "DESCRIBES",
       "spdxElementId": "SPDXRef-DOCUMENT"
     },
@@ -392,14 +437,9 @@
       "spdxElementId": "SPDXRef-DOCUMENT"
     },
     {
-      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-crypto-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-primitives-0.2.0",
       "relationshipType": "GENERATED_FROM",
-      "spdxElementId": "SPDXRef-File-cardano_valkyoth_crypto"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-signer-0.1.0",
-      "relationshipType": "GENERATED_FROM",
-      "spdxElementId": "SPDXRef-File-cardano_valkyoth_signer"
+      "spdxElementId": "SPDXRef-File-cardano_valkyoth_primitives"
     },
     {
       "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_crypto",
@@ -412,49 +452,14 @@
       "spdxElementId": "SPDXRef-DOCUMENT"
     },
     {
-      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_cbor",
-      "relationshipType": "DESCRIBES",
-      "spdxElementId": "SPDXRef-DOCUMENT"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-ledger-0.1.0",
-      "relationshipType": "GENERATED_FROM",
-      "spdxElementId": "SPDXRef-File-cardano_valkyoth_ledger"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-node-0.1.0",
-      "relationshipType": "GENERATED_FROM",
-      "spdxElementId": "SPDXRef-File-cardano_valkyoth_node"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-primitives-0.1.0",
-      "relationshipType": "GENERATED_FROM",
-      "spdxElementId": "SPDXRef-File-cardano_valkyoth_primitives"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-cbor-0.1.0",
-      "relationshipType": "GENERATED_FROM",
-      "spdxElementId": "SPDXRef-File-cardano_valkyoth_cbor"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_node",
-      "relationshipType": "DESCRIBES",
-      "spdxElementId": "SPDXRef-DOCUMENT"
-    },
-    {
-      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-sanitization-0.1.0",
-      "relationshipType": "GENERATED_FROM",
-      "spdxElementId": "SPDXRef-File-cardano_valkyoth_sanitization"
-    },
-    {
       "relatedSpdxElement": "SPDXRef-File-cardano_valkyoth_testkit",
       "relationshipType": "DESCRIBES",
       "spdxElementId": "SPDXRef-DOCUMENT"
     },
     {
-      "relatedSpdxElement": "SPDXRef-Package-cardano-valkyoth-testkit-0.1.0",
+      "relatedSpdxElement": "SPDXRef-Package-cardano-0.3.0",
       "relationshipType": "GENERATED_FROM",
-      "spdxElementId": "SPDXRef-File-cardano_valkyoth_testkit"
+      "spdxElementId": "SPDXRef-File-cardano"
     }
   ],
   "spdxVersion": "SPDX-2.3"

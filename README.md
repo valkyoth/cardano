@@ -35,7 +35,7 @@ execution, or wallet-adjacent helpers become real dependencies.
 
 ## Current Status
 
-Status: `v0.2.0` release-readiness tooling implementation stop reached;
+Status: `v0.3.0` domain-newtypes implementation stop reached;
 waiting for pentest.
 
 Implemented now:
@@ -55,6 +55,9 @@ Implemented now:
 - Release-readiness tooling for release notes, SBOM, permanent pentest report
   metadata, reviewed-commit checks, tag-exists checks, and support-crate
   publish-order validation.
+- Explicit primitive domains for network ids, eras, slots, epochs, block
+  numbers, coins, transaction ids, block hashes, datum hashes, script hashes,
+  key hashes, policy ids, credentials, and bounded asset names.
 
 Not implemented yet:
 
@@ -90,7 +93,7 @@ Not implemented yet:
 
 ```toml
 [dependencies]
-cardano = "0.2"
+cardano = "0.3"
 ```
 
 ## Features

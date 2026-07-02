@@ -1,7 +1,7 @@
 # cardano Specification Matrix
 
-Status: repository foundation only. No Cardano protocol behavior is implemented
-yet.
+Status: `v0.3.0` primitive domain newtypes are implemented and waiting for
+pentest.
 
 Official source and fixture revisions are governed by
 [Spec Source Policy](spec-source-policy.md). `v0.1.0` records the source
@@ -10,10 +10,14 @@ families and workflow; later milestones must pin exact revisions in
 
 | Area | Status | Evidence |
 | --- | --- | --- |
-| Cardano ledger specs | source family recorded | `cardano-ledger` repository recorded in `spec-lock.toml`; no revision pinned yet |
+| Cardano ledger specs | pinned | `cardano-ledger` revision `7903c0074df4ecc2d96b780ca4e5299d2b866553` recorded in `spec-lock.toml` |
+| Cardano node source | pinned | `cardano-node` revision `4fa3e6c4143df1f17aac9e114517e18f3b775934` recorded in `spec-lock.toml` |
+| Ouroboros network source | pinned | `ouroboros-network` revision `b47dbc2c29108e593cc47524cffb75008b88fe90` recorded in `spec-lock.toml` |
+| CIPs | pinned | `CIPs` revision `20c819b25abee6551a3ef51778b975e7463e1269` recorded in `spec-lock.toml` |
+| Primitive domains | implemented | `cardano-valkyoth-primitives` implements network id, era, slot, epoch, block number, coin, hash/id, credential, policy id, and asset-name domains from pinned Conway CDDL evidence |
 | CDDL and CBOR | planned | CBOR/CDDL codec milestone must pin CDDL source revisions before implementation |
 | Address formats | planned | Address milestone must pin relevant ledger/CIP source revisions before implementation |
-| Era model | planned | Era milestones must pin ledger formal specs and CDDL revisions before implementation |
+| Era model | primitive names only | `cardano-valkyoth-primitives::Era` names known ledger eras; era-specific ledger behavior remains planned |
 | Transactions | planned | Transaction milestones must pin ledger spec, CDDL, and fixture revisions |
 | Blocks | planned | Block milestones must pin ledger/node source revisions |
 | Certificates and staking | planned | Ledger validation milestones must pin Shelley-era and later ledger sources |

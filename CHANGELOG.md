@@ -2,7 +2,17 @@
 
 All notable changes to `cardano` will be documented here.
 
-## 0.2.0 - Unreleased
+## 0.3.0 - Unreleased
+
+- Added explicit Cardano primitive domains for network ids, eras, slots,
+  epochs, block numbers, coins, transaction ids, block hashes, datum hashes,
+  script hashes, key hashes, policy ids, credentials, and bounded asset names.
+- Re-exported the primitive domains through the `cardano` facade crate.
+- Pinned official Cardano source revisions for the first protocol-domain
+  milestone and recorded the primitive evidence in the spec matrix.
+- Added the explicit `scripts/release_0_3_gate.sh` milestone gate.
+
+## 0.2.0 - 2026-07-02
 
 - Added the explicit `scripts/release_0_2_gate.sh` milestone gate.
 - Hardened release-readiness error diagnostics for permanent pentest report

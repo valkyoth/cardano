@@ -7,5 +7,7 @@
 //! - <https://github.com/valkyoth/cardano>
 //! - <https://github.com/valkyoth/cardano/blob/main/docs/RELEASE_PLAN.md>
 
+pub use cardano_valkyoth_primitives as primitives;
+
 /// Current crate version.
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

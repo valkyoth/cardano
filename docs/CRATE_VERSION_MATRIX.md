@@ -1,6 +1,6 @@
 # Crate Version Matrix
 
-Status: `v0.2.0` release-readiness tooling milestone.
+Status: `v0.3.0` domain-newtypes milestone.
 
 ## Version Rules
 
@@ -53,3 +53,25 @@ release; support crates remain on `0.1.0` to avoid unnecessary republishing.
 | `cardano-valkyoth-signer` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
 | `cardano-valkyoth-testkit` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
 | `cardano` | `0.2.0` | code | yes | Facade crate publishes the v0.2.0 repository README and release-readiness tooling update. |
+
+## v0.3.0 Tracking Table
+
+`v0.3.0` adds explicit primitive domain newtypes. The primitives support crate
+receives its first independent minor bump; the facade crate uses the milestone
+version and re-exports the primitives crate.
+
+| Crate | Version | Change | Publish | Reason |
+| --- | --- | --- | --- | --- |
+| `cardano-valkyoth-cbor` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
+| `cardano-valkyoth-primitives` | `0.2.0` | code | yes | Adds explicit Cardano primitive domain newtypes and bounded constructors. |
+| `cardano-valkyoth-crypto` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
+| `cardano-valkyoth-address` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
+| `cardano-valkyoth-ledger` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
+| `cardano-valkyoth-script` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
+| `cardano-valkyoth-governance` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
+| `cardano-valkyoth-node` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
+| `cardano-valkyoth-rpc` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
+| `cardano-valkyoth-sanitization` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
+| `cardano-valkyoth-signer` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
+| `cardano-valkyoth-testkit` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
+| `cardano` | `0.3.0` | code | yes | Re-exports the primitives crate and publishes the v0.3.0 repository README. |
