@@ -13,6 +13,8 @@ Status: implementation stop reached; waiting for pentest.
 - Add the explicit `scripts/release_0_3_gate.sh` milestone gate.
 - Pin official Cardano source revisions for the first protocol-domain
   milestone.
+- Harden spec-lock validation so pinned official source revisions must be
+  fetchable from their declared upstream repositories.
 
 ## Security
 
@@ -23,7 +25,12 @@ Status: implementation stop reached; waiting for pentest.
   hashes. No secret-bearing primitive or constant-time equality policy is
   admitted in this release.
 - Asset names are bounded to 0..32 bytes before storage.
+- Asset-name equality, hashing, and ordering use significant bytes only, so
+  unused padding cannot affect semantic identity.
 - Fixed hash/id domains reject slices with the wrong byte length.
+- The v0.3.0 scratch pentest found a medium spec-lock integrity gap and a low
+  `AssetName` padding-invariant hazard; both are remediated before tag
+  readiness.
 
 ## Spec Evidence
 
@@ -39,6 +46,9 @@ The implemented byte lengths and bounds come from the Conway CDDL definitions
 for `hash32`, `hash28`, `transaction_id`, `script_hash`, `policy_id`,
 `asset_name`, `credential`, `network_id`, `slot_no`, `epoch_no`, `block_no`,
 and `coin`.
+
+The release gate validates that each pinned source revision can be fetched from
+the official repository named in `spec-lock.toml`.
 
 ## Publishing
 

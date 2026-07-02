@@ -10,6 +10,10 @@ All notable changes to `cardano` will be documented here.
 - Re-exported the primitive domains through the `cardano` facade crate.
 - Pinned official Cardano source revisions for the first protocol-domain
   milestone and recorded the primitive evidence in the spec matrix.
+- Hardened spec-lock validation so pinned official source revisions must be
+  fetchable from their declared upstream repositories.
+- Changed `AssetName` equality, hashing, and ordering to use significant bytes
+  only, preventing future unused-tail padding from affecting semantic identity.
 - Added the explicit `scripts/release_0_3_gate.sh` milestone gate.
 
 ## 0.2.0 - 2026-07-02

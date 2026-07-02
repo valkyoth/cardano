@@ -2,6 +2,7 @@ use super::{
     AssetName, BlockHash, BlockNumber, Coin, Credential, DatumHash, Epoch, Era, KeyHash, NetworkId,
     PolicyId, PrimitiveError, ScriptHash, Slot, TransactionId,
 };
+use core::hash::{Hash, Hasher};
 
 #[test]
 fn network_id_round_trips() {
@@ -121,4 +122,30 @@ fn asset_name_rejects_more_than_thirty_two_bytes() {
             actual: 33
         })
     );
+}
+
+#[test]
+fn asset_name_identity_uses_significant_bytes_only() {
+    let clean_result = AssetName::try_from_slice(&[9]);
+    assert!(clean_result.is_ok());
+    let Ok(clean) = clean_result else {
+        return;
+    };
+    let mut padded = [0u8; AssetName::MAX_LEN];
+    padded[0] = 9;
+    padded[1] = 99;
+    let dirty_tail = AssetName {
+        bytes: padded,
+        len: 1,
+    };
+
+    assert_eq!(clean, dirty_tail);
+    assert_eq!(clean.cmp(&dirty_tail), core::cmp::Ordering::Equal);
+    assert_eq!(stable_hash(clean), stable_hash(dirty_tail));
+}
+
+fn stable_hash(value: AssetName) -> u64 {
+    let mut hasher = std::collections::hash_map::DefaultHasher::new();
+    value.hash(&mut hasher);
+    hasher.finish()
 }

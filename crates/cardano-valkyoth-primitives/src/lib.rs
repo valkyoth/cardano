@@ -5,7 +5,11 @@
 #[cfg(feature = "std")]
 extern crate std;
 
-use core::fmt;
+use core::{
+    cmp::Ordering,
+    fmt,
+    hash::{Hash, Hasher},
+};
 
 /// Network id for transaction-body network discriminants.
 ///
@@ -286,7 +290,7 @@ impl Credential {
 }
 
 /// Native asset name bytes.
-#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug)]
 pub struct AssetName {
     bytes: [u8; Self::MAX_LEN],
     len: u8,
@@ -370,6 +374,32 @@ impl TryFrom<&[u8]> for AssetName {
 
     fn try_from(value: &[u8]) -> Result<Self, Self::Error> {
         Self::try_from_slice(value)
+    }
+}
+
+impl PartialEq for AssetName {
+    fn eq(&self, other: &Self) -> bool {
+        self.as_bytes() == other.as_bytes()
+    }
+}
+
+impl Eq for AssetName {}
+
+impl Hash for AssetName {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.as_bytes().hash(state);
+    }
+}
+
+impl PartialOrd for AssetName {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for AssetName {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.as_bytes().cmp(other.as_bytes())
     }
 }
 
