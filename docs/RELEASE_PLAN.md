@@ -35,6 +35,8 @@ Every release should prefer:
 - fixtures before broad implementation;
 - pinned official Cardano source revisions before consensus-sensitive code;
 - negative and adversarial tests with each parser;
+- explicit panic-isolation decisions before node or query binaries accept
+  untrusted messages;
 - explicit era, network, slot, epoch, and protocol-parameter context over
   global "latest" behavior;
 - no default networking, signing, wallet, local key storage, or Plutus

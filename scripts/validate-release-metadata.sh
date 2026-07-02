@@ -7,6 +7,7 @@ test -f LICENSE-APACHE
 test -f SECURITY.md
 test -f CHANGELOG.md
 test -x scripts/validate-release-readiness.sh
+test -x scripts/validate-spec-lock-policy.sh
 test -x scripts/test-release-readiness.sh
 test -x scripts/check_latest_tools.sh
 test -x scripts/release_crates.py

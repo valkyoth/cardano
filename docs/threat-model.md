@@ -30,6 +30,9 @@
 - First-party protocol-facing crates forbid unsafe code.
 - Decode budgets and exact-consumption checks are required before parsers ship.
 - Official source revisions are pinned before consensus-sensitive behavior.
+- Future node and query adapters must isolate untrusted-input panic blast
+  radius with an explicit per-binary unwind/catch policy or an isolated worker
+  process boundary before message decode paths ship.
 - Secrets and signed transactions are redacted by default in diagnostics.
 - Every release requires local gates, SBOM, cargo-deny, cargo-audit, and
   pentest evidence before tags.
@@ -41,3 +44,6 @@
   differential tests are incomplete.
 - Node/query responses can be stale, adversarial, or inconsistent unless the
   caller uses an explicitly verified trust model.
+- Workspace-wide `panic = "abort"` is appropriate for current library crates,
+  but future node or query binaries need a deliberate panic-isolation decision
+  before accepting untrusted peer or endpoint messages.

@@ -12,3 +12,5 @@ All notable changes to `cardano` will be documented here.
   testkit, and the `cardano` facade.
 - Added local release gates, crate publication planning, SBOM generation hooks,
   and pentest-before-tag readiness checks.
+- Added spec-lock policy validation and documented the future node/query
+  panic-isolation decision before untrusted message decode paths ship.

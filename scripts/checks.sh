@@ -5,6 +5,7 @@ cargo fmt --all --check
 scripts/check_shell_syntax.sh
 scripts/check_doc_links.sh
 scripts/validate-release-metadata.sh
+scripts/validate-spec-lock-policy.sh check
 scripts/validate-modularity-policy.sh check
 scripts/validate-security-policy.sh
 scripts/release_crates.py --check

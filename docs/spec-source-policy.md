@@ -39,6 +39,11 @@ If the official sources disagree, are ambiguous, or have no fixture for the
 behavior, stop and document the ambiguity before implementing. Do not silently
 choose behavior based on memory, blog posts, or a single client implementation.
 
+Pull requests that touch ledger, script, or governance implementation crates
+must pin `ledger_rev`, `node_rev`, `ouroboros_network_rev`, and `cips_rev` to
+40-character commit hashes with `spec_required = true`. The CI gate enforces
+this path-sensitive policy through `scripts/validate-spec-lock-policy.sh`.
+
 ## Local Reference Store
 
 External Cardano reference material belongs outside this repository. The

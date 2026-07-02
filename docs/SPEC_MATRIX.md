@@ -32,3 +32,7 @@ families and workflow; later milestones must pin exact revisions in
 
 Every release that claims support for a Cardano era, CDDL type, ledger rule,
 CIP, node protocol, or query method must update this matrix and `spec-lock.toml`.
+
+Pull requests touching `cardano-valkyoth-ledger`, `cardano-valkyoth-script`, or
+`cardano-valkyoth-governance` must set `spec_required = true` and pin all
+official source revisions in `spec-lock.toml` before merging.
