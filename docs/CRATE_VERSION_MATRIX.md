@@ -1,6 +1,6 @@
 # Crate Version Matrix
 
-Status: `v0.1.0` repository foundation scaffold.
+Status: `v0.2.0` release-readiness tooling milestone.
 
 ## Version Rules
 
@@ -31,3 +31,24 @@ Status: `v0.1.0` repository foundation scaffold.
 | `cardano-valkyoth-signer` | `0.1.0` | code | yes | Initial external-signer-first crate boundary. |
 | `cardano-valkyoth-testkit` | `0.1.0` | code | yes | Initial fixture and adversarial-test crate boundary. |
 | `cardano` | `0.1.0` | code | yes | Initial facade crate. |
+
+## v0.2.0 Tracking Table
+
+`v0.2.0` is a repository release-readiness tooling milestone. No crates are
+republished for this release.
+
+| Crate | Version | Change | Publish | Reason |
+| --- | --- | --- | --- | --- |
+| `cardano-valkyoth-cbor` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano-valkyoth-primitives` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano-valkyoth-crypto` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano-valkyoth-address` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano-valkyoth-ledger` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano-valkyoth-script` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano-valkyoth-governance` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano-valkyoth-node` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano-valkyoth-rpc` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano-valkyoth-sanitization` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano-valkyoth-signer` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano-valkyoth-testkit` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |

@@ -35,7 +35,8 @@ execution, or wallet-adjacent helpers become real dependencies.
 
 ## Current Status
 
-Status: `v0.1.0` repository foundation scaffold.
+Status: `v0.2.0` release-readiness tooling implementation stop reached;
+waiting for pentest.
 
 Implemented now:
 
@@ -51,6 +52,9 @@ Implemented now:
 - Initial crate boundaries for primitives, CBOR, crypto, addresses, ledger,
   scripts, governance, node, RPC, sanitization, signer, testkit, and the
   `cardano` facade.
+- Release-readiness tooling for release notes, SBOM, permanent pentest report
+  metadata, reviewed-commit checks, tag-exists checks, and support-crate
+  publish-order validation.
 
 Not implemented yet:
 

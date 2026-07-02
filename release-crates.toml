@@ -1,93 +1,93 @@
 [release]
-version = "0.1.0"
+version = "0.2.0"
 
 [crates.cardano-valkyoth-cbor]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial bounded CBOR/CDDL crate boundary."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano-valkyoth-primitives]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial Cardano domain primitive crate boundary."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano-valkyoth-crypto]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial crypto trait-boundary crate."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano-valkyoth-address]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial address crate boundary."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano-valkyoth-ledger]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial era-aware ledger crate boundary."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano-valkyoth-script]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial native-script and Plutus-boundary crate."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano-valkyoth-governance]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial Conway governance crate boundary."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano-valkyoth-node]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial node protocol boundary crate."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano-valkyoth-rpc]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial query/submit trust-policy crate."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano-valkyoth-sanitization]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial secret-bearing data sanitization crate boundary."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano-valkyoth-signer]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial external-signer-first crate boundary."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano-valkyoth-testkit]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial fixture and adversarial-test crate boundary."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano]
-previous_version = "0.0.0"
+previous_version = "0.1.0"
 version = "0.1.0"
-change = "code"
-publish = true
-reason = "Initial facade crate."
+change = "unchanged"
+publish = false
+reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."

@@ -44,11 +44,26 @@ if ! git cat-file -e "HEAD:${pentest_report}" 2>/dev/null; then
     exit 1
 fi
 
-grep -q '^Status: PASS$' "$pentest_report"
-grep -Eq '^Reviewed-Commit: [0-9a-f]{40}$' "$pentest_report"
-grep -Eq '^Tester: .+' "$pentest_report"
-grep -Eq '^Scope: .+' "$pentest_report"
-grep -Eq '^Date: [0-9]{4}-[0-9]{2}-[0-9]{2}$' "$pentest_report"
+if ! grep -q '^Status: PASS$' "$pentest_report"; then
+    echo "pentest report status must be PASS: ${pentest_report}" >&2
+    exit 1
+fi
+if ! grep -Eq '^Reviewed-Commit: [0-9a-f]{40}$' "$pentest_report"; then
+    echo "pentest report must include a full Reviewed-Commit: ${pentest_report}" >&2
+    exit 1
+fi
+if ! grep -Eq '^Tester: .+' "$pentest_report"; then
+    echo "pentest report has blank Tester: ${pentest_report}" >&2
+    exit 1
+fi
+if ! grep -Eq '^Scope: .+' "$pentest_report"; then
+    echo "pentest report has blank Scope: ${pentest_report}" >&2
+    exit 1
+fi
+if ! grep -Eq '^Date: [0-9]{4}-[0-9]{2}-[0-9]{2}$' "$pentest_report"; then
+    echo "pentest report must include Date: YYYY-MM-DD: ${pentest_report}" >&2
+    exit 1
+fi
 
 reviewed_commit="$(sed -n 's/^Reviewed-Commit: //p' "$pentest_report")"
 if ! git cat-file -e "${reviewed_commit}^{commit}" 2>/dev/null; then

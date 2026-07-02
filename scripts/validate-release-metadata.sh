@@ -14,6 +14,8 @@ test -x scripts/release_crates.py
 test -f release-crates.toml
 test -f docs/CRATE_VERSION_MATRIX.md
 test -f release-notes/RELEASE_NOTES_0.1.0.md
+test -f release-notes/RELEASE_NOTES_0.2.0.md
+test -x scripts/release_0_2_gate.sh
 test -f docs/spec-source-policy.md
 grep -q 'ledger_repo' spec-lock.toml
 grep -q 'local_reference_store_env' spec-lock.toml

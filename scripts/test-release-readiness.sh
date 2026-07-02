@@ -111,6 +111,36 @@ repo="$(make_fixture missing-report)"
         scripts/validate-release-readiness.sh "v0.2.0"
 )
 
+repo="$(make_fixture bad-status)"
+(
+    cd "$repo"
+    reviewed_commit="$(git rev-parse HEAD)"
+    write_release_notes "0.2.0"
+    write_sbom
+    write_pentest "v0.2.0" "$reviewed_commit"
+    sed -i 's/^Status: PASS$/Status: FAIL/' "security/pentest/v0.2.0.md"
+    git add "security/pentest/v0.2.0.md"
+    git commit -q -m "report"
+
+    assert_fails_with "pentest report status must be PASS" \
+        scripts/validate-release-readiness.sh "v0.2.0"
+)
+
+repo="$(make_fixture missing-tester)"
+(
+    cd "$repo"
+    reviewed_commit="$(git rev-parse HEAD)"
+    write_release_notes "0.2.0"
+    write_sbom
+    write_pentest "v0.2.0" "$reviewed_commit"
+    sed -i 's/^Tester: .*/Tester: /' "security/pentest/v0.2.0.md"
+    git add "security/pentest/v0.2.0.md"
+    git commit -q -m "report"
+
+    assert_fails_with "pentest report has blank Tester" \
+        scripts/validate-release-readiness.sh "v0.2.0"
+)
+
 repo="$(make_fixture uncommitted-report)"
 (
     cd "$repo"

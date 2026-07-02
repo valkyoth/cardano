@@ -1,6 +1,6 @@
 # Release Notes 0.1.0
 
-Status: planned foundation release.
+Status: released foundation release.
 
 ## Scope
 
