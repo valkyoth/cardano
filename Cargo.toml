@@ -1,0 +1,59 @@
+[workspace]
+members = [
+    "crates/cardano",
+    "crates/cardano-valkyoth-address",
+    "crates/cardano-valkyoth-cbor",
+    "crates/cardano-valkyoth-crypto",
+    "crates/cardano-valkyoth-governance",
+    "crates/cardano-valkyoth-ledger",
+    "crates/cardano-valkyoth-node",
+    "crates/cardano-valkyoth-primitives",
+    "crates/cardano-valkyoth-rpc",
+    "crates/cardano-valkyoth-script",
+    "crates/cardano-valkyoth-signer",
+    "crates/cardano-valkyoth-testkit",
+]
+default-members = ["crates/cardano"]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.90"
+license = "MIT OR Apache-2.0"
+homepage = "https://github.com/valkyoth/cardano"
+repository = "https://github.com/valkyoth/cardano"
+readme = "README.md"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+unsafe_op_in_unsafe_fn = "forbid"
+unused_must_use = "deny"
+missing_docs = "deny"
+
+[workspace.lints.clippy]
+panic = "forbid"
+unwrap_used = "forbid"
+expect_used = "forbid"
+undocumented_unsafe_blocks = "forbid"
+indexing_slicing = "forbid"
+arithmetic_side_effects = "forbid"
+cast_possible_truncation = "deny"
+cast_sign_loss = "deny"
+
+[workspace.dependencies]
+cardano-valkyoth-address = { path = "crates/cardano-valkyoth-address", version = "0.1.0" }
+cardano-valkyoth-cbor = { path = "crates/cardano-valkyoth-cbor", version = "0.1.0" }
+cardano-valkyoth-crypto = { path = "crates/cardano-valkyoth-crypto", version = "0.1.0" }
+cardano-valkyoth-governance = { path = "crates/cardano-valkyoth-governance", version = "0.1.0" }
+cardano-valkyoth-ledger = { path = "crates/cardano-valkyoth-ledger", version = "0.1.0" }
+cardano-valkyoth-node = { path = "crates/cardano-valkyoth-node", version = "0.1.0" }
+cardano-valkyoth-primitives = { path = "crates/cardano-valkyoth-primitives", version = "0.1.0" }
+cardano-valkyoth-rpc = { path = "crates/cardano-valkyoth-rpc", version = "0.1.0" }
+cardano-valkyoth-script = { path = "crates/cardano-valkyoth-script", version = "0.1.0" }
+cardano-valkyoth-signer = { path = "crates/cardano-valkyoth-signer", version = "0.1.0" }
+cardano-valkyoth-testkit = { path = "crates/cardano-valkyoth-testkit", version = "0.1.0" }
+
+[profile.release]
+overflow-checks = true
+panic = "abort"

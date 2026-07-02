@@ -1,0 +1,19 @@
+[package]
+name = "cardano-valkyoth-crypto"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+homepage.workspace = true
+repository.workspace = true
+readme = "README.md"
+description = "Cardano cryptographic trait boundaries."
+
+[features]
+default = []
+std = []
+
+[dependencies]
+
+[lints]
+workspace = true

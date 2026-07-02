@@ -1,0 +1,86 @@
+[release]
+version = "0.1.0"
+
+[crates.cardano-valkyoth-cbor]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial bounded CBOR/CDDL crate boundary."
+
+[crates.cardano-valkyoth-primitives]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial Cardano domain primitive crate boundary."
+
+[crates.cardano-valkyoth-crypto]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial crypto trait-boundary crate."
+
+[crates.cardano-valkyoth-address]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial address crate boundary."
+
+[crates.cardano-valkyoth-ledger]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial era-aware ledger crate boundary."
+
+[crates.cardano-valkyoth-script]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial native-script and Plutus-boundary crate."
+
+[crates.cardano-valkyoth-governance]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial Conway governance crate boundary."
+
+[crates.cardano-valkyoth-node]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial node protocol boundary crate."
+
+[crates.cardano-valkyoth-rpc]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial query/submit trust-policy crate."
+
+[crates.cardano-valkyoth-signer]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial external-signer-first crate boundary."
+
+[crates.cardano-valkyoth-testkit]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial fixture and adversarial-test crate boundary."
+
+[crates.cardano]
+previous_version = "0.0.0"
+version = "0.1.0"
+change = "code"
+publish = true
+reason = "Initial facade crate."
