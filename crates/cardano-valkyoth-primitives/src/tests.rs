@@ -145,7 +145,22 @@ fn asset_name_identity_uses_significant_bytes_only() {
 }
 
 fn stable_hash(value: AssetName) -> u64 {
-    let mut hasher = std::collections::hash_map::DefaultHasher::new();
+    let mut hasher = TestHasher::default();
     value.hash(&mut hasher);
     hasher.finish()
+}
+
+#[derive(Default)]
+struct TestHasher(u64);
+
+impl Hasher for TestHasher {
+    fn finish(&self) -> u64 {
+        self.0
+    }
+
+    fn write(&mut self, bytes: &[u8]) {
+        for byte in bytes {
+            self.0 = self.0.wrapping_mul(257).wrapping_add(u64::from(*byte));
+        }
+    }
 }

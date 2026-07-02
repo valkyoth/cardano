@@ -8,14 +8,24 @@ spec_value() {
 
 verify_revision_exists() {
     name="$1"
-    repo_url="$2"
-    rev="$3"
+    allowed_repo="$2"
+    declared_repo="$3"
+    rev="$4"
+
+    case "$declared_repo" in
+        "https://github.com/${allowed_repo}") ;;
+        *)
+            echo "spec-lock.toml: ${name} repo must be https://github.com/${allowed_repo}, got ${declared_repo}" >&2
+            exit 1
+            ;;
+    esac
+
     scratch="$(mktemp -d)"
     trap 'rm -rf "$scratch"' EXIT HUP INT TERM
 
     git -C "$scratch" init -q
-    if ! git -C "$scratch" fetch --depth=1 "$repo_url" "$rev" >/dev/null 2>&1; then
-        echo "spec-lock.toml: ${name} revision ${rev} not found on ${repo_url}" >&2
+    if ! git -C "$scratch" -c protocol.ext.allow=never fetch --depth=1 -- "$declared_repo" "$rev" >/dev/null 2>&1; then
+        echo "spec-lock.toml: ${name} revision ${rev} not found on ${declared_repo}" >&2
         exit 1
     fi
 
@@ -32,18 +42,22 @@ require_pinned_revisions() {
 
     verify_revision_exists \
         "ledger_rev" \
+        "IntersectMBO/cardano-ledger" \
         "$(spec_value ledger_repo)" \
         "$(spec_value ledger_rev)"
     verify_revision_exists \
         "node_rev" \
+        "IntersectMBO/cardano-node" \
         "$(spec_value node_repo)" \
         "$(spec_value node_rev)"
     verify_revision_exists \
         "ouroboros_network_rev" \
+        "IntersectMBO/ouroboros-network" \
         "$(spec_value ouroboros_network_repo)" \
         "$(spec_value ouroboros_network_rev)"
     verify_revision_exists \
         "cips_rev" \
+        "cardano-foundation/CIPs" \
         "$(spec_value cips_repo)" \
         "$(spec_value cips_rev)"
 }
