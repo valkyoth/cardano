@@ -9,8 +9,9 @@ All notable changes to `cardano` will be documented here.
   metadata.
 - Added negative release-readiness tests for non-PASS status and blank tester
   fields.
-- Updated release-crate tracking so `v0.2.0` is a repository tooling release
-  with no crate republishing.
+- Updated release-crate tracking so only the `cardano` facade crate is
+  republished for `v0.2.0`, allowing crates.io to show the repository README
+  while support crates remain on `0.1.0`.
 
 ## 0.1.0 - 2026-07-02
 

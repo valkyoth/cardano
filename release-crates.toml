@@ -87,7 +87,7 @@ reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
 
 [crates.cardano]
 previous_version = "0.1.0"
-version = "0.1.0"
-change = "unchanged"
-publish = false
-reason = "No crate changes in the v0.2.0 release-readiness tooling milestone."
+version = "0.2.0"
+change = "code"
+publish = true
+reason = "Facade crate publishes the v0.2.0 repository README and release-readiness tooling update."

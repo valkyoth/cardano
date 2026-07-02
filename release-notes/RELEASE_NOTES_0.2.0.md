@@ -8,7 +8,8 @@ Status: implementation stop reached; waiting for pentest.
 - Harden release-readiness diagnostics for permanent pentest report metadata.
 - Add negative release-readiness tests for non-PASS status and blank tester
   fields.
-- Track `v0.2.0` as a repository release with no crate republishing.
+- Publish only the `cardano` facade crate at `0.2.0` so crates.io shows the
+  repository README for the current release.
 
 ## Security
 
@@ -27,5 +28,6 @@ Status: implementation stop reached; waiting for pentest.
 
 ## Publishing
 
-No crates are republished for `v0.2.0`; all workspace crates remain at
-`0.1.0`.
+Only the `cardano` facade crate is republished for `v0.2.0`. Support crates
+remain at `0.1.0` and will be republished only when they receive meaningful
+crate-level changes.

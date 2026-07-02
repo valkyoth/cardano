@@ -34,8 +34,9 @@ Status: `v0.2.0` release-readiness tooling milestone.
 
 ## v0.2.0 Tracking Table
 
-`v0.2.0` is a repository release-readiness tooling milestone. No crates are
-republished for this release.
+`v0.2.0` is a release-readiness tooling milestone. Only the `cardano` facade
+crate is republished so crates.io shows the repository README for the current
+release; support crates remain on `0.1.0` to avoid unnecessary republishing.
 
 | Crate | Version | Change | Publish | Reason |
 | --- | --- | --- | --- | --- |
@@ -51,4 +52,4 @@ republished for this release.
 | `cardano-valkyoth-sanitization` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
 | `cardano-valkyoth-signer` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
 | `cardano-valkyoth-testkit` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
-| `cardano` | `0.1.0` | unchanged | no | No crate changes in the v0.2.0 release-readiness tooling milestone. |
+| `cardano` | `0.2.0` | code | yes | Facade crate publishes the v0.2.0 repository README and release-readiness tooling update. |

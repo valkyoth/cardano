@@ -90,7 +90,7 @@ Not implemented yet:
 
 ```toml
 [dependencies]
-cardano = "0.1"
+cardano = "0.2"
 ```
 
 ## Features

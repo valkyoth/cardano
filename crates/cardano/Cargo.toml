@@ -1,12 +1,12 @@
 [package]
 name = "cardano"
-version.workspace = true
+version = "0.2.0"
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 homepage.workspace = true
 repository.workspace = true
-readme = "README.md"
+readme = "../../README.md"
 description = "no_std-first Cardano protocol building blocks for Rust."
 
 [features]
