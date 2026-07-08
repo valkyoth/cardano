@@ -37,6 +37,11 @@ Every release should prefer:
 - one protocol boundary at a time;
 - fixtures before broad implementation;
 - pinned official Cardano source revisions before consensus-sensitive code;
+- first-party implementations for core Cardano wire formats, ledger state
+  transitions, validation rules, and deterministic local computations;
+- third-party crates only as reviewed optional backends, references, or
+  compatibility adapters unless a cryptographic primitive is explicitly
+  accepted with a first-party boundary and replacement/audit plan;
 - negative and adversarial tests with each parser;
 - explicit panic-isolation decisions before node or query binaries accept
   untrusted messages;
@@ -69,6 +74,15 @@ A version is not tag-ready until:
 `scripts/check_latest_tools.sh` is an advisory networked current-version check.
 Run it before updating pinned tools and before release when network access is
 available, but do not make tag readiness depend on live upstream state.
+
+Cardano upstream monitoring is also a maintenance requirement. When ledger,
+Plutus, governance, node, or wallet-adjacent surfaces are active, planned
+automation must check the latest official ledger, node, Ouroboros-network,
+CIP, Plutus, and relevant backend/source revisions, then report whether a
+maintenance release is needed for changed CDDL, era rules, protocol
+parameters, governance rules, node protocol versions, cost models, Plutus
+language versions, or fixtures. Live upstream checks are advisory inputs;
+concrete release claims still depend on pinned revisions in `spec-lock.toml`.
 
 When a version's implementation criteria are done, stop and say:
 
@@ -143,13 +157,18 @@ relevant dependency point.
 | Empty spec revisions are acceptable for the scaffold but unsafe for ledger, script, or governance implementation. | Added `scripts/validate-spec-lock-policy.sh` and path-sensitive CI before protocol crates change. |
 | Plutus execution is a large security boundary and must not be pulled into default builds. | Added `v0.32.0 - Optional Plutus Execution Adapter Decision` before any execution adapter can be admitted. |
 | Node and query transport behavior can imply trust in unverified state. | Added separate node threat-model, node protocol, query admission, and query trust-model milestones before transport support. |
-| Formal verification evidence was not scheduled. | Added `v0.49.0 - Kani Formal Verification Harness` as extra assurance, not a replacement for fuzzing, conformance tests, pentest, or audit. |
+| The roadmap stopped at decoded/typestate ledger helpers without full ledger state transition, block validity, rewards, staking, governance enactment, or fixture admission. | Added `v0.48.0` through `v0.62.0` for full ledger state, chain validity, Plutus integration, conformance admission, and hardening. |
+| Query, submit, wallet, transaction builder, application-standard, and indexer behavior were deferred instead of versioned. | Added `v0.63.0` through `v0.78.0` so wallet/application surfaces are explicit, optional where sensitive, and tested before 1.0. |
+| Full node, sync, mempool, chain index, and operations behavior were out of scope despite the full-crate direction. | Added `v0.86.0` through `v0.92.0` for networking, sync orchestration, mempool, observability, and block-production/validator decisions. |
+| Plutus, Hydra, Mithril, consensus interop, and node mini-protocol compatibility need versioned boundaries before broad ecosystem support is claimed. | Added `v0.79.0` through `v0.85.0` for these protocol and ecosystem-adjacent tracks. |
+| Formal verification evidence was not scheduled late enough relative to the broader 1.0 scope. | Moved Kani to `v0.94.0` as extra assurance after full ledger/node/application tracks, not as a replacement for fuzzing, conformance tests, pentest, or audit. |
 
 ## Milestone Stop Contract
 
-Every milestone below ends with the same rule: after the verification commands
-pass, stop before tagging and request pentest for the exact commit. The "Stop"
-line is part of the release criteria.
+Every milestone below inherits the same stop rule: after the verification
+commands pass, stop before tagging and request pentest for the exact commit.
+When a milestone does not repeat a dedicated `Stop:` block for readability,
+the required stop text is still part of that milestone's release criteria.
 
 ## Phase 0: Repository And Release Discipline
 
@@ -1634,159 +1653,1076 @@ Stop:
 v0.47.0 implementation stop reached. Run pentest for this exact commit.
 ```
 
-## Phase 10: Production Hardening
+## Phase 10: Full Ledger State And Chain Validity
 
-### v0.48.0 - Platform Matrix
+This phase turns decoded and typestate-checked ledger data into complete
+claimed Cardano ledger behavior. It is the point where the crate stops being
+only a parser/toolkit and starts proving full ledger-state outcomes for the
+eras it claims.
+
+### v0.48.0 - Genesis And Network Configuration Import
+
+Goal: construct reproducible network and genesis context from explicit inputs.
+
+Deliverables:
+
+- Byron/Shelley genesis domain models;
+- protocol-parameter import and validation;
+- network magic and network id consistency checks;
+- initial UTxO, stake, delegation, pool, and reward-state boundaries;
+- fixture harness for pinned genesis material.
+
+Verification:
+
+- genesis fixture tests for claimed networks;
+- `scripts/release_0_48_gate.sh`
+- `cargo deny check`
+
+Exit criteria:
+
+- A claimed network can start from explicit first-party genesis and protocol
+  parameter data, not hidden node assumptions.
+
+### v0.49.0 - Era-Specific Ledger Rule Matrix
+
+Goal: make every claimed era rule explicit before broad validation expands.
+
+Deliverables:
+
+- Byron, Shelley, Allegra, Mary, Alonzo, Babbage, and Conway rule matrix;
+- unsupported-rule and unsupported-era report;
+- fixture mapping by era and rule family;
+- release-blocking drift check for pinned ledger sources.
+
+Verification:
+
+- rule-matrix consistency test;
+- `scripts/validate-spec-lock-policy.sh check`
+- `cargo test -p cardano-valkyoth-ledger`.
+
+Exit criteria:
+
+- No ledger validation helper can silently use a rule from the wrong era.
+
+### v0.50.0 - Full Transaction Semantic Validity
+
+Goal: validate complete transaction semantics for claimed eras.
+
+Deliverables:
+
+- input spending, collateral, reference input, output, mint, fee, deposit,
+  refund, withdrawal, certificate, metadata, validity interval, and required
+  signer rules;
+- checked arithmetic and value-conservation integration;
+- protocol-parameter and era activation context;
+- official transaction fixture admission for claimed eras.
+
+Verification:
+
+- transaction validity fixtures;
+- adversarial accounting and era-mismatch tests;
+- `cargo test -p cardano-valkyoth-ledger`.
+
+Exit criteria:
+
+- Decoded transactions are not treated as valid until all claimed ledger
+  semantic checks pass.
+
+### v0.51.0 - Witness And Signature Validation Integration
+
+Goal: bind witness verification to transaction validity without choosing a
+default cryptographic backend.
+
+Deliverables:
+
+- required signer and credential matching;
+- key, bootstrap, native script, Plutus, and governance witness integration;
+- caller-provided crypto backend conformance checklist;
+- duplicate, missing, and wrong-domain witness tests.
+
+Verification:
+
+- witness validation fixtures;
+- crypto test-double coverage;
+- `cargo deny check`.
+
+Exit criteria:
+
+- Witness validation is complete for claimed eras and cannot hide a concrete
+  signing or hashing implementation.
+
+### v0.52.0 - Block Header And Block Body Validity
+
+Goal: validate block-level constraints for claimed eras.
+
+Deliverables:
+
+- header body, operational certificate, protocol version, issuer, and VRF
+  boundary models;
+- block size, transaction count, body hash, and slot/era checks;
+- block body transaction validity integration;
+- official block fixture coverage.
+
+Verification:
+
+- block/header fixture tests;
+- malformed body hash and era tests;
+- `cargo test -p cardano-valkyoth-ledger`.
+
+Exit criteria:
+
+- Blocks can be validated against explicit ledger and era context for claimed
+  support, not only decoded.
+
+### v0.53.0 - UTxO State Transition Integration
+
+Goal: apply valid transactions to UTxO state deterministically.
+
+Deliverables:
+
+- UTxO add/remove/update model;
+- multi-asset mint/burn integration;
+- collateral and failed-script handling where applicable;
+- state snapshot input and output types;
+- replayable state-transition fixtures.
+
+Verification:
+
+- official state-transition fixtures where available;
+- adversarial double-spend and rollback tests;
+- `cargo test -p cardano-valkyoth-ledger`.
+
+Exit criteria:
+
+- Claimed transactions can be applied to explicit state and produce
+  deterministic post-state.
+
+### v0.54.0 - Staking, Rewards, And Pool State Transitions
+
+Goal: validate and apply staking-related state transitions.
+
+Deliverables:
+
+- stake registration, deregistration, delegation, pool registration/update,
+  retirement, withdrawal, deposit, and refund transitions;
+- reward-account and pool-state models;
+- epoch-boundary reward accounting boundary;
+- fixture and adversarial coverage.
+
+Verification:
+
+- staking and reward fixtures;
+- duplicate/expired/unknown credential tests;
+- `cargo test -p cardano-valkyoth-ledger`.
+
+Exit criteria:
+
+- Staking and reward behavior is explicit and cannot be approximated by
+  transaction-local accounting.
+
+### v0.55.0 - Governance Enactment State Transitions
+
+Goal: apply Conway governance outcomes to ledger state.
+
+Deliverables:
+
+- proposal lifecycle, voting thresholds, DRep state, committee state, treasury,
+  constitution, and parameter-update enactment;
+- era and protocol-parameter guards;
+- CIP/ledger disagreement handling;
+- governance fixture coverage.
+
+Verification:
+
+- Conway governance fixtures;
+- threshold and enactment negative tests;
+- `cargo test -p cardano-valkyoth-governance -p cardano-valkyoth-ledger`.
+
+Exit criteria:
+
+- Governance helpers can produce deterministic state changes only when the
+  ledger evidence supports them.
+
+### v0.56.0 - Plutus Validation Integration
+
+Goal: integrate Plutus script validation with ledger semantics only after the
+execution/resource boundary is admitted.
+
+Deliverables:
+
+- language version, cost model, datum, redeemer, reference script, collateral,
+  and execution-unit integration;
+- script integrity hash validation;
+- optional execution adapter conformance checks;
+- fail-closed behavior when execution is unavailable or unsupported.
+
+Verification:
+
+- Plutus validation fixtures for claimed language versions;
+- malformed datum/redeemer and budget tests;
+- dependency review for any execution backend.
+
+Exit criteria:
+
+- Plutus-dependent transactions cannot be claimed valid without explicit,
+  versioned execution evidence.
+
+### v0.57.0 - Historical Era Compatibility Matrix
+
+Goal: ensure historical era behavior is deliberate, not collapsed into Conway.
+
+Deliverables:
+
+- Byron, Shelley, Allegra, Mary, Alonzo, Babbage, and Conway compatibility
+  matrix;
+- per-era supported and unsupported rule list;
+- fixture coverage by era;
+- migration notes for behavior that remains out of scope.
+
+Verification:
+
+- matrix consistency tests;
+- fixture selection audit;
+- `scripts/validate-spec-lock-policy.sh check`.
+
+Exit criteria:
+
+- Users can see exactly which eras and rule families are implemented.
+
+### v0.58.0 - Full Ledger Fixture Admission
+
+Goal: claim ledger support only where pinned official or accepted fixture
+families pass.
+
+Deliverables:
+
+- transaction, block, certificate, staking, script, governance, and era
+  fixture admission list;
+- unsupported-fixture report with reasons;
+- conformance report generated by local scripts;
+- release-blocking fixture drift check.
+
+Verification:
+
+- full ledger fixture command documented and passing for claimed support;
+- differential report against accepted ledger reference behavior.
+
+Exit criteria:
+
+- Ledger support claims are backed by executable conformance evidence.
+
+### v0.59.0 - Ledger State Snapshot And Serialization
+
+Goal: persist and restore explicit ledger state without trusting a node.
+
+Deliverables:
+
+- snapshot schema for admitted state components;
+- versioned snapshot metadata and spec-lock provenance;
+- bounded decode/encode of snapshots;
+- compatibility tests for schema evolution.
+
+Verification:
+
+- snapshot round-trip and malformed-snapshot tests;
+- `cargo test -p cardano-valkyoth-ledger`.
+
+Exit criteria:
+
+- Long-running users can checkpoint state while preserving release and source
+  provenance.
+
+### v0.60.0 - Rollback And Fork Handling
+
+Goal: model rollback and fork-choice inputs for library users.
+
+Deliverables:
+
+- rollback-safe state transition records;
+- chain fragment and point domains;
+- explicit intersection and rollback limit policy;
+- no implicit consensus claim beyond supplied evidence.
+
+Verification:
+
+- rollback and fork-choice unit tests;
+- adversarial stale/unknown point tests.
+
+Exit criteria:
+
+- Consumers can handle chain rollbacks without ad hoc state mutation.
+
+### v0.61.0 - Ledger Performance And DoS Hardening
+
+Goal: harden full ledger validation against hostile inputs and large states.
+
+Deliverables:
+
+- worst-case validation cost review;
+- state-size and transaction-size stress tests;
+- budget and allocation caps for full validation paths;
+- fuzz targets for high-risk ledger inputs.
+
+Verification:
+
+- DoS/load test commands;
+- `cargo check --manifest-path fuzz/Cargo.toml`
+- `cargo deny check`.
+
+Exit criteria:
+
+- Full ledger validation has bounded resource behavior documented for claimed
+  features.
+
+### v0.62.0 - Full Ledger Audit Hardening
+
+Goal: prepare full ledger behavior for broader integration and audit.
+
+Deliverables:
+
+- ledger hardening report;
+- regression corpus from fixture mismatches and pentest findings;
+- unsafe/dependency review;
+- Kani candidate list for arithmetic and typestate invariants.
+
+Verification:
+
+- `scripts/checks.sh`
+- ledger-specific hardening report.
+
+Exit criteria:
+
+- Full ledger behavior is ready to be consumed by wallet, node, and query
+  tracks.
+
+## Phase 11: Query, Submit, Wallet, And Signer Surfaces
+
+### v0.63.0 - Query/Submit Dependency Admission
+
+Goal: admit provider/transport crates behind `cardano-valkyoth-rpc` only after
+review.
+
+Deliverables:
+
+- dependency, license, feature, MSRV, and maintenance review;
+- endpoint policy types;
+- localhost-only local node fixture plan;
+- timeout and response-size limits;
+- no hardcoded public endpoints.
+
+Verification:
+
+- `cargo check --workspace --all-features`
+- `cargo deny check`
+- local query fixture smoke test if admitted.
+
+Exit criteria:
+
+- Query/submit support remains optional and policy-first.
+
+### v0.64.0 - Local Cardano Node Fixture
+
+Goal: provide a reproducible local node fixture for integration tests.
+
+Deliverables:
+
+- Podman-managed local Cardano node/testnet fixture or documented equivalent;
+- pinned image name/version or digest;
+- start, health-check, and teardown scripts;
+- no persisted wallet/key material;
+- no default mainnet connection.
+
+Verification:
+
+- local node smoke script starts, checks, and tears down the fixture.
+
+Exit criteria:
+
+- Integration tests do not depend on a developer's existing node.
+
+### v0.65.0 - Query Trust Models
+
+Goal: distinguish trusted, untrusted, quorum, and locally verified query data.
+
+Deliverables:
+
+- query trust model APIs;
+- chain/genesis verification at connection setup;
+- stale response and rollback handling;
+- response size and batch limits.
+
+Verification:
+
+- malicious/stale query fixture tests.
+
+Exit criteria:
+
+- Transport trust cannot be confused with ledger truth.
+
+### v0.66.0 - Submit Policy And Rebroadcast Controls
+
+Goal: make transaction submission behavior explicit and non-surprising.
+
+Deliverables:
+
+- submit request and response domains;
+- no automatic resubmission by default;
+- manual rebroadcast policy where admitted;
+- redaction for raw transaction bytes and endpoint credentials.
+
+Verification:
+
+- submit policy tests;
+- redacted error/debug tests.
+
+Exit criteria:
+
+- Transaction submission cannot leak payloads or fan out unexpectedly.
+
+### v0.67.0 - Transaction Builder
+
+Goal: provide safe transaction construction over validated ledger domains.
+
+Deliverables:
+
+- input/output/value/fee/certificate/script/governance builder states;
+- era and protocol-parameter context;
+- minimum-ADA, fee-estimation, collateral, and validity-interval helpers;
+- no signing or network submission side effects.
+
+Verification:
+
+- builder compile-time and runtime state tests;
+- official transaction construction vectors where available.
+
+Exit criteria:
+
+- Users can build transactions without bypassing ledger validation gates.
+
+### v0.68.0 - Wallet Domain Boundary
+
+Goal: decide and implement the safe wallet-facing subset.
+
+Deliverables:
+
+- account, address discovery, coin-selection, change-output, and fee policy
+  domains;
+- no mnemonic or local key storage by default;
+- explicit privacy and address-reuse caveats;
+- hardware/external signer integration points.
+
+Verification:
+
+- coin-selection and change tests;
+- redaction tests for wallet context.
+
+Exit criteria:
+
+- Wallet helpers are deterministic local policy tools, not a hidden wallet
+  service.
+
+### v0.69.0 - Local Key And Mnemonic Admission Decision
+
+Goal: decide whether local key derivation and mnemonic support belong in the
+workspace before 1.0.
+
+Deliverables:
+
+- BIP-39/CIP-1852 and hardware-wallet scope decision;
+- dependency review for randomness, derivation, and zeroization crates if
+  admitted;
+- non-default feature plan or documented deferral;
+- no-debug and sanitization requirements.
+
+Verification:
+
+- dependency review evidence or deferral record;
+- secret redaction/zeroization tests if admitted.
+
+Exit criteria:
+
+- Local key material cannot enter default builds or undocumented APIs.
+
+### v0.70.0 - Wallet And Signer Integration Fuzzing
+
+Goal: fuzz wallet, builder, signer, and submit boundaries before they stabilize.
+
+Deliverables:
+
+- transaction builder fuzz targets;
+- address/coin-selection edge corpus;
+- signer request redaction corpus;
+- submit response malformed-input corpus.
+
+Verification:
+
+- `cargo check --manifest-path fuzz/Cargo.toml`
+
+Exit criteria:
+
+- Wallet-adjacent parsers and builders have adversarial coverage.
+
+## Phase 12: Application Standards And Ecosystem Helpers
+
+### v0.71.0 - Token And Asset Helper APIs
+
+Goal: add typed helpers for common native-token and NFT workflows.
+
+Deliverables:
+
+- asset id, policy id, asset name, quantity, fingerprint, and display helper
+  APIs;
+- CIP-14 fingerprint support;
+- mint/burn helper boundaries;
+- no indexer or market-data assumptions.
+
+Verification:
+
+- CIP vector tests;
+- docs examples compile.
+
+Exit criteria:
+
+- Common asset operations are typed deterministic helpers over ledger domains.
+
+### v0.72.0 - Metadata Standard Helpers
+
+Goal: support common Cardano metadata standards without trusting off-chain
+content.
+
+Deliverables:
+
+- CIP-25 NFT metadata helpers;
+- CIP-68 reference NFT helper boundaries;
+- metadata size, string, and URL redaction policy;
+- no HTTP fetching by default.
+
+Verification:
+
+- metadata standard fixture tests;
+- malformed and oversized metadata tests.
+
+Exit criteria:
+
+- Application metadata can be decoded and built without implying remote content
+  trust.
+
+### v0.73.0 - DRep And Governance Workflow Helpers
+
+Goal: provide governance workflow helpers above the ledger primitives.
+
+Deliverables:
+
+- DRep registration/update/retirement helpers;
+- vote and proposal construction helpers;
+- governance metadata and anchor validation policy;
+- no remote metadata trust by default.
+
+Verification:
+
+- CIP-1694 workflow tests;
+- docs examples compile.
+
+Exit criteria:
+
+- Governance applications can build valid workflows while ledger truth remains
+  pinned to official sources.
+
+### v0.74.0 - Stake Pool And Delegation Helpers
+
+Goal: expose stake pool and delegation convenience APIs.
+
+Deliverables:
+
+- pool registration/update/retirement builders;
+- delegation certificate helpers;
+- pool metadata URL/hash policy;
+- reward account helper APIs.
+
+Verification:
+
+- stake pool and delegation vector tests.
+
+Exit criteria:
+
+- Staking helpers are typed local builders, not remote pool discovery clients.
+
+### v0.75.0 - Identity And DID/Credential Boundary Decision
+
+Goal: decide which identity/CIP credential helpers belong in the crate.
+
+Deliverables:
+
+- supported CIP list or explicit deferral;
+- credential format parsing boundaries;
+- privacy and correlation caveats;
+- no network resolver by default.
+
+Verification:
+
+- decision document and security review.
+
+Exit criteria:
+
+- Identity support is either versioned or excluded with rationale.
+
+### v0.76.0 - Application Data Builders
+
+Goal: provide safe builders for common on-chain application payloads.
+
+Deliverables:
+
+- metadata, datum, redeemer, and script-reference builders;
+- bounded output and canonical encoding;
+- application-facing errors and redaction policy.
+
+Verification:
+
+- round-trip and malformed-builder tests.
+
+Exit criteria:
+
+- Application payloads can be constructed without ad hoc CBOR downstream.
+
+### v0.77.0 - Indexer Data Model Boundary
+
+Goal: model indexer-facing data without shipping a database or crawler by
+default.
+
+Deliverables:
+
+- block, transaction, UTxO, metadata, governance, and event projection models;
+- rollback-aware event stream domains;
+- schema evolution and provenance metadata;
+- no default database dependency.
+
+Verification:
+
+- projection and rollback tests.
+
+Exit criteria:
+
+- Indexers can use stable data domains while storage remains an adapter choice.
+
+### v0.78.0 - Application Helper Fuzzing
+
+Goal: fuzz metadata, application helper, and projection parsers.
+
+Deliverables:
+
+- metadata standard fuzz targets;
+- datum/redeemer builder fuzz targets;
+- projection decode fuzz targets;
+- seed corpus for malformed application data.
+
+Verification:
+
+- `cargo check --manifest-path fuzz/Cargo.toml`
+
+Exit criteria:
+
+- Application-facing parsers have adversarial coverage before 1.0.
+
+## Phase 13: Plutus, Mithril, Hydra, And Consensus Interop
+
+### v0.79.0 - Plutus Language Version Matrix
+
+Goal: make Plutus language and cost-model support explicit.
+
+Deliverables:
+
+- supported Plutus language version matrix;
+- cost-model source revision evidence;
+- unsupported-language and unsupported-builtin errors;
+- fixture coverage by language version.
+
+Verification:
+
+- Plutus fixture tests;
+- `scripts/validate-spec-lock-policy.sh check`.
+
+Exit criteria:
+
+- Plutus support claims are versioned and cannot collapse language versions.
+
+### v0.80.0 - Plutus Execution Backend Admission
+
+Goal: admit or defer concrete Plutus execution backends with explicit policy.
+
+Deliverables:
+
+- backend dependency review;
+- timeout, memory, CPU, and process-isolation policy;
+- execution-unit conformance checklist;
+- compatibility report against accepted fixtures.
+
+Verification:
+
+- backend smoke tests or documented deferral;
+- `cargo deny check`.
+
+Exit criteria:
+
+- Plutus execution cannot be hidden behind default features or unbounded local
+  execution.
+
+### v0.81.0 - Mithril Certificate Boundary
+
+Goal: model Mithril certificate and snapshot verification boundaries.
+
+Deliverables:
+
+- certificate, signer, stake distribution, and snapshot domains;
+- cryptographic backend boundary;
+- trust-anchor and source-policy documentation;
+- no default network fetching.
+
+Verification:
+
+- Mithril fixture/vector tests where admitted.
+
+Exit criteria:
+
+- Mithril data can be represented and verified only under explicit trust
+  anchors.
+
+### v0.82.0 - Hydra Protocol Boundary
+
+Goal: decide and model Hydra head protocol support.
+
+Deliverables:
+
+- Hydra scope decision;
+- head state, snapshot, commit/decommit, and close/contest/fanout domains if
+  admitted;
+- trust and liveness caveats;
+- no default transport dependency.
+
+Verification:
+
+- Hydra fixture tests or documented deferral.
+
+Exit criteria:
+
+- Hydra support is either versioned or explicitly excluded from 1.0.
+
+### v0.83.0 - Ouroboros Consensus Evidence Boundary
+
+Goal: expose consensus evidence helpers without implementing a full consensus
+node by accident.
+
+Deliverables:
+
+- chain selection, leader, certificate, and header evidence models as scoped by
+  official sources;
+- explicit trusted checkpoint and rollback policy;
+- unsupported consensus feature list.
+
+Verification:
+
+- consensus evidence fixture tests.
+
+Exit criteria:
+
+- Consensus-adjacent APIs cannot imply full node security without evidence.
+
+### v0.84.0 - Node Mini-Protocol Compatibility
+
+Goal: version compatibility for selected node mini-protocols.
+
+Deliverables:
+
+- chain-sync, block-fetch, tx-submission, local-state-query, and local-tx-submit
+  version matrix;
+- codec compatibility tests;
+- backward/forward compatibility policy.
+
+Verification:
+
+- mini-protocol fixture tests;
+- protocol fuzz targets build.
+
+Exit criteria:
+
+- Node protocol support has an explicit version matrix.
+
+### v0.85.0 - Ecosystem Interop Fuzzing
+
+Goal: fuzz Plutus, Mithril, Hydra, consensus, and mini-protocol parsers.
+
+Deliverables:
+
+- parser-specific fuzz targets;
+- seed corpus for malformed certificates, snapshots, protocol messages, and
+  Plutus inputs;
+- crash reproduction docs.
+
+Verification:
+
+- `cargo check --manifest-path fuzz/Cargo.toml`
+
+Exit criteria:
+
+- Ecosystem-adjacent untrusted parsers have adversarial coverage.
+
+## Phase 14: Full Node, Sync, And Operations Boundaries
+
+### v0.86.0 - Full Node Scope Decision
+
+Goal: decide exactly what full-node behavior belongs in this crate family.
+
+Deliverables:
+
+- full-node, library, adapter, and compatibility scope split;
+- threat model for long-running networked operation;
+- storage, mempool, sync, peer, and observability boundary decisions;
+- default-off feature policy.
+
+Verification:
+
+- security review of the decision document.
+
+Exit criteria:
+
+- Full node behavior is either versioned or explicitly excluded before code
+  lands.
+
+### v0.87.0 - Networking Dependency Admission
+
+Goal: admit networking dependencies behind optional crates only.
+
+Deliverables:
+
+- latest-version, license, feature, MSRV, and maintenance review;
+- no default graph expansion;
+- timeout, message-size, and backpressure policy;
+- loopback-only test transport.
+
+Verification:
+
+- `cargo check --workspace --all-features`
+- `cargo deny check`
+
+Exit criteria:
+
+- Networking dependencies are isolated from protocol-core users.
+
+### v0.88.0 - Peer And Connection State Machines
+
+Goal: model peer lifecycle and connection behavior as bounded state machines.
+
+Deliverables:
+
+- peer identity, handshake, version negotiation, timeout, and connection state
+  domains;
+- inbound/outbound policy;
+- resource and backpressure limits;
+- redacted diagnostics.
+
+Verification:
+
+- state-machine tests;
+- malicious peer fixture tests.
+
+Exit criteria:
+
+- Peer management cannot imply trusted ledger or wallet behavior.
+
+### v0.89.0 - Sync Orchestration
+
+Goal: model chain sync, block fetch, rollback, and state handoff workflows.
+
+Deliverables:
+
+- chain-sync and block-fetch orchestration states;
+- rollback-safe state handoff;
+- progress/error observability hooks with redaction;
+- cancellation and resource-limit tests.
+
+Verification:
+
+- sync state-machine tests;
+- local node fixture smoke tests if transport is admitted.
+
+Exit criteria:
+
+- Sync orchestration cannot imply verified state without ledger and consensus
+  evidence.
+
+### v0.90.0 - Mempool And Tx Submission Policy
+
+Goal: provide mempool and transaction submission policy helpers.
+
+Deliverables:
+
+- transaction admission and replacement policy;
+- duplicate, stale, and invalid transaction handling;
+- private/local transaction redaction policy;
+- no automatic rebroadcast by default.
+
+Verification:
+
+- mempool policy tests;
+- redaction tests.
+
+Exit criteria:
+
+- Mempool helpers are deterministic policy tools, not a hidden node service.
+
+### v0.91.0 - Chain Index And Storage Adapter Boundary
+
+Goal: support long-running applications without selecting a database by
+default.
+
+Deliverables:
+
+- chain index event and query domains;
+- storage adapter trait boundaries;
+- rollback-aware persistence policy;
+- schema/provenance metadata.
+
+Verification:
+
+- adapter test doubles;
+- rollback persistence tests.
+
+Exit criteria:
+
+- Storage remains an adapter choice while indexer semantics are stable.
+
+### v0.92.0 - Operations, Metrics, And Validator Boundary Decision
+
+Goal: decide what operational and validator-adjacent support belongs before
+1.0.
+
+Deliverables:
+
+- metrics, tracing, health, and redaction policy;
+- block production, stake pool operator, and validator key custody decision;
+- if implemented, split follow-up release plan before 1.0;
+- no validator key material in default crates.
+
+Verification:
+
+- security review of the operations decision document.
+
+Exit criteria:
+
+- Operational support is versioned and key custody remains explicit.
+
+## Phase 15: Production Hardening
+
+### v0.93.0 - Platform Matrix
 
 Goal: verify supported platforms, targets, and feature combinations.
 
 Deliverables:
 
-- Supported target matrix.
-- `no_std`, `std`, and optional feature compatibility tests.
-- MSRV through pinned stable checks.
-- Documentation of unsupported platforms and feature combinations.
+- Linux, Windows, BSD, macOS, Android, iOS, embedded, and no_std target notes;
+- `no_std`, `std`, and optional feature compatibility tests;
+- MSRV through pinned stable checks;
+- documentation of unsupported platforms and feature combinations.
 
 Verification:
 
 - `scripts/checks.sh`
-- `scripts/release_0_48_gate.sh`
+- `scripts/release_0_93_gate.sh`
 - platform matrix checks;
 - `cargo deny check`
 - `cargo audit`
 
 Exit criteria:
 
-- Users can see which targets and feature combinations are supported before
-  `1.0.0`.
+- Platform support claims match tested evidence.
 
-Stop:
-
-```text
-v0.48.0 implementation stop reached. Run pentest for this exact commit.
-```
-
-### v0.49.0 - Kani Formal Verification Harness
+### v0.94.0 - Kani Formal Verification Harness
 
 Goal: add selected formal verification harnesses as extra assurance.
 
 Deliverables:
 
-- Kani harnesses for selected arithmetic, parser-budget, canonicality, and
-  typestate invariants.
-- Documentation that Kani does not replace fuzzing, conformance tests, pentest,
+- Kani harness admission and install/update policy;
+- proof harnesses for decode budgets, canonicality, checked arithmetic,
+  asset ordering, and typestate transitions;
+- documentation that Kani does not replace fuzzing, conformance tests, pentest,
   cargo-audit/cargo-deny, or independent security review.
-- CI or local script for running the harnesses.
 
 Verification:
 
+- Kani proof command documented and passing for admitted harnesses;
 - `scripts/checks.sh`
-- `scripts/release_0_49_gate.sh`
-- Kani harness command;
-- `cargo deny check`
-- `cargo audit`
 
 Exit criteria:
 
-- High-value invariants have formal checks where practical.
+- High-value invariants have bounded formal checks before API stability.
 
-Stop:
+### v0.95.0 - Public API Stability Pass
 
-```text
-v0.49.0 implementation stop reached. Run pentest for this exact commit.
-```
-
-### v0.50.0 - Public API Stability Pass
-
-Goal: prepare public APIs for `1.0.0`.
+Goal: stabilize the public API shape before `1.0.0`.
 
 Deliverables:
 
-- API review for naming, error stability, typestate consistency, feature
-  boundaries, and documentation.
-- Deprecation or migration notes for any unstable pre-1.0 surfaces.
-- Examples for major supported workflows.
+- API stability policy update;
+- deprecation policy;
+- feature compatibility matrix;
+- migration notes for all breaking changes;
+- examples for major supported workflows.
 
 Verification:
 
-- `scripts/checks.sh`
-- `scripts/release_0_50_gate.sh`
-- documentation tests;
-- API review checklist;
-- `cargo deny check`
-- `cargo audit`
+- docs and examples compile;
+- API review checklist.
 
 Exit criteria:
 
-- Public APIs are ready for final audit and 1.0 stabilization.
+- The remaining 1.0 work is hardening, not API invention.
 
-Stop:
-
-```text
-v0.50.0 implementation stop reached. Run pentest for this exact commit.
-```
-
-### v0.51.0 - Independent Audit Remediation
+### v0.96.0 - Independent Audit Remediation
 
 Goal: resolve independent audit findings before release evidence dry run.
 
 Deliverables:
 
-- Audit report intake.
-- Fixes for all critical/high findings or documented accepted residual risk.
-- Regression tests for fixed findings.
-- Updated threat model and security controls.
+- audit report intake;
+- fixes for all critical/high findings or documented accepted residual risk;
+- regression tests for fixed findings;
+- updated threat model and security controls.
 
 Verification:
 
 - `scripts/checks.sh`
-- `scripts/release_0_51_gate.sh`
-- audit remediation tests;
-- `cargo deny check`
-- `cargo audit`
+- audit remediation review.
 
 Exit criteria:
 
-- No unresolved critical or high audit findings remain before release dry run.
+- No unresolved critical or high audit findings remain.
 
-Stop:
-
-```text
-v0.51.0 implementation stop reached. Run pentest for this exact commit.
-```
-
-### v0.52.0 - Release Evidence Dry Run
+### v0.97.0 - Release Evidence Dry Run
 
 Goal: dry-run the full 1.0 release evidence process.
 
 Deliverables:
 
-- Complete release notes.
-- SBOM and provenance.
-- Crate version matrix.
-- Spec matrix.
-- Pentest report.
-- Signed tag rehearsal.
-- Publish-order dry run.
+- signed release manifest draft;
+- SBOM and provenance;
+- crate version matrix;
+- spec and conformance matrix;
+- dependency compatibility matrix;
+- pentest report;
+- publish-order dry run.
 
 Verification:
 
 - `scripts/checks.sh`
-- `scripts/release_0_52_gate.sh`
+- `scripts/release_0_97_gate.sh`
 - `scripts/release_crates.py --check`
-- `scripts/validate-release-readiness.sh v0.52.0`
+- `scripts/validate-release-readiness.sh v0.97.0`
 - `cargo deny check`
 - `cargo audit`
 
 Exit criteria:
 
 - The project can produce all 1.0 release evidence before the 1.0 stop point.
-
-Stop:
-
-```text
-v0.52.0 implementation stop reached. Run pentest for this exact commit.
-```
 
 ## v1.0.0 - Production Cardano Toolkit
 
@@ -1798,6 +2734,9 @@ Deliverables:
   verification surfaces for every claimed feature.
 - Optional node, query, signer, Plutus execution, and local-signer surfaces only
   where explicitly admitted and documented.
+- Full ledger-state, wallet/application, node/sync, ecosystem interop, and
+  operational surfaces are either supported with conformance evidence or
+  explicitly excluded with rationale.
 - Complete spec matrix with pinned official source revisions.
 - Complete conformance and differential evidence for every claimed feature.
 - SBOM, provenance, signed release manifest, release notes, migration guidance,

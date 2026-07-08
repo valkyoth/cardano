@@ -4,18 +4,21 @@ Status: planning document
 
 Crate name: `cardano`
 
-1.0 target: a serious production-ready Cardano protocol toolkit for bounded
-CBOR/CDDL decoding, era-aware ledger types, explicit UTxO and validation
-boundaries, address and script handling, governance data, optional node
-protocols, optional signer isolation, optional query/submit transports, and
-conformance evidence against pinned official source revisions.
+1.0 target: a serious production-ready Cardano crate family for bounded
+CBOR/CDDL decoding, era-aware ledger types, full ledger-state transition,
+transaction and block validity, staking, governance, script and Plutus
+boundaries, query/submit and signer isolation, wallet/application helpers,
+indexer projections, node/sync/operations boundaries, and conformance evidence
+against pinned official source revisions.
 
 ## Core Position
 
 `cardano` is not a generic re-export of upstream Cardano crates and must not
-hide networking, signing, Plutus execution, wallet behavior, or full-node
-behavior behind defaults. It is a security-oriented workspace that gives
-applications stable, testable, explicit boundaries around Cardano operations.
+hide networking, signing, Plutus execution, wallet behavior, full-node
+behavior, or indexer/storage behavior behind defaults. It is a
+security-oriented workspace that gives applications stable, testable, explicit
+boundaries around Cardano operations, then grows those boundaries into a full
+Cardano implementation only when each surface has versioned evidence.
 
 The first production value is:
 
@@ -23,10 +26,16 @@ The first production value is:
 - CDDL-backed type admission;
 - explicit network, era, slot, epoch, and protocol-parameter context;
 - stable ledger, transaction, certificate, script, and governance domains;
+- full transaction, block, ledger-state, staking, reward, rollback, and
+  governance enactment validity for every claimed era;
 - signer and key isolation;
+- transaction builder, wallet-facing policy, application-standard, and
+  indexer-facing helper surfaces with no hidden network or storage side
+  effects;
 - node/query trust models that do not imply ledger correctness;
-- optional node protocol and Plutus execution boundaries with explicit trust
-  and resource policies;
+- optional node protocol, sync, mempool, operations, Plutus execution, Mithril,
+  Hydra, and consensus-adjacent boundaries with explicit trust and resource
+  policies;
 - conformance evidence against pinned upstream specification revisions.
 
 ## Non-Negotiable Engineering Rules
@@ -97,4 +106,18 @@ implementation stops until the ambiguity is documented and reviewed.
 8. Governance and Conway-era validation helpers.
 9. Conformance, fixture import, fuzzing, and differential test infrastructure.
 10. Optional node/query/signer boundaries.
-11. Production hardening, formal verification, audit remediation, and `1.0.0`.
+11. Full ledger state, transaction validity, block validity, staking, rewards,
+    governance enactment, rollback, and ledger hardening.
+12. Query/submit, transaction builder, wallet policy, local-key decision, and
+    signer integration fuzzing.
+13. Application standards, asset helpers, metadata helpers, governance
+    workflows, staking helpers, identity boundary decisions, and indexer data
+    models.
+14. Plutus language/cost-model support, Plutus backend admission, Mithril,
+    Hydra, consensus evidence, node mini-protocol compatibility, and ecosystem
+    interop fuzzing.
+15. Full-node scope, networking dependency admission, peer state machines, sync
+    orchestration, mempool policy, chain index, storage adapters, operations,
+    metrics, and validator-adjacent boundary decisions.
+16. Production hardening, formal verification, audit remediation, release
+    evidence dry run, and `1.0.0`.

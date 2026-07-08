@@ -24,19 +24,21 @@
 # cardano
 
 `cardano` is a `no_std`-first Rust workspace for Cardano protocol building
-blocks.
+blocks, growing through versioned release gates into a full Cardano crate
+family.
 
 The project target is a production-ready Cardano crate at `1.0.0`, reached
 through small releases with explicit security, conformance, and dependency
 evidence. The first implementation work is intentionally conservative:
 explicit domains, bounded CBOR/CDDL policy, stable crate boundaries, and
-security documentation before node protocols, signing, local keys, Plutus
-execution, or wallet-adjacent helpers become real dependencies.
+security documentation before full ledger validation, node protocols, signing,
+local keys, Plutus execution, wallet/application helpers, or full-node
+behavior become real dependencies.
 
 ## Current Status
 
-Status: `v0.3.0` domain-newtypes implementation stop reached;
-waiting for pentest.
+Status: `v0.3.0` tagged baseline; next milestones continue the domain,
+encoding, validation, and full-implementation roadmap toward `1.0.0`.
 
 Implemented now:
 
@@ -70,7 +72,8 @@ Not implemented yet:
 - No local key storage.
 - No node-to-client or node-to-node protocol support.
 - No RPC/query/submit transport.
-- No wallet, indexer, or full-node behavior.
+- No wallet, indexer, or full-node behavior yet; these are versioned later in
+  the release plan and remain default-off or decision-gated.
 
 ## Trust Dashboard
 
@@ -108,7 +111,7 @@ cardano = "0.3"
 | `testkit` | no | Test fixtures, conformance helpers, and adversarial inputs. |
 
 Default builds do not enable networking, signing, local key storage, Plutus
-execution, wallet behavior, or node operation.
+execution, wallet behavior, indexer storage, or node operation.
 
 ## Source Discipline
 
