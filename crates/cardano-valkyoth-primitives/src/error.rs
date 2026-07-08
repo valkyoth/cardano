@@ -1,6 +1,7 @@
 use core::fmt;
 
 /// Stable high-level error category for Cardano public APIs.
+#[non_exhaustive]
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub enum ErrorCategory {
     /// Primitive domain construction failed.
@@ -51,6 +52,7 @@ impl fmt::Display for ErrorCategory {
 }
 
 /// Stable error code for Cardano public APIs.
+#[non_exhaustive]
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub enum ErrorCode {
     /// Network id is not one of the admitted Cardano network ids.
@@ -206,7 +208,17 @@ impl PrimitiveError {
 
 impl fmt::Display for PrimitiveError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{}: {}", self.code(), self.message())
+        write!(f, "{}: {}", self.code(), self.message())?;
+        match self {
+            Self::InvalidNetworkId { value } => write!(f, " (value={value})"),
+            Self::InvalidCredentialTag { value } => write!(f, " (value={value})"),
+            Self::InvalidByteLength { expected, actual } => {
+                write!(f, " (expected={expected}, actual={actual})")
+            }
+            Self::AssetNameTooLong { max, actual } => {
+                write!(f, " (max={max}, actual={actual})")
+            }
+        }
     }
 }
 

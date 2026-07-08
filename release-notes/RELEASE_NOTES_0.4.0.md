@@ -13,6 +13,10 @@ Status: implementation stop reached; pentest required before tagging.
 
 - Error formatting uses stable code/message text and does not include
   secret-bearing payloads.
+- `ErrorCategory` and `ErrorCode` are non-exhaustive so future milestones can
+  add specific protocol codes without forcing downstream exhaustive matches.
+- Primitive error formatting keeps non-secret malformed-input diagnostics such
+  as rejected tags and byte lengths for audit-log forensics.
 - No networking, signing, local key storage, wallet behavior, Plutus execution,
   or node operation is enabled by this release.
 

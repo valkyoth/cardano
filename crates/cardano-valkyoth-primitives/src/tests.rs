@@ -199,7 +199,27 @@ fn primitive_errors_expose_stable_codes_and_messages() {
     assert_eq!(error.message(), "invalid Cardano primitive byte length");
     assert_eq!(
         error.to_string(),
-        "cardano.primitive.invalid_byte_length: invalid Cardano primitive byte length"
+        "cardano.primitive.invalid_byte_length: invalid Cardano primitive byte length (expected=32, actual=31)"
+    );
+}
+
+#[test]
+fn primitive_error_display_keeps_non_secret_diagnostics() {
+    assert_eq!(
+        PrimitiveError::InvalidNetworkId { value: 5 }.to_string(),
+        "cardano.primitive.invalid_network_id: invalid Cardano network id (value=5)"
+    );
+    assert_eq!(
+        PrimitiveError::InvalidCredentialTag { value: 9 }.to_string(),
+        "cardano.primitive.invalid_credential_tag: invalid Cardano credential tag (value=9)"
+    );
+    assert_eq!(
+        PrimitiveError::AssetNameTooLong {
+            max: 32,
+            actual: 33
+        }
+        .to_string(),
+        "cardano.primitive.asset_name_too_long: Cardano asset name exceeds 32 bytes (max=32, actual=33)"
     );
 }
 

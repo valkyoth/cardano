@@ -10,6 +10,8 @@ All notable changes to `cardano` will be documented here.
 - Added stable machine-readable error codes and static messages for primitive
   constructor failures.
 - Re-exported the stable error model through the `cardano` facade crate.
+- Marked the stable error category/code enums non-exhaustive before release.
+- Preserved non-secret primitive error diagnostics in `Display` output.
 - Added the explicit `scripts/release_0_4_gate.sh` milestone gate.
 
 ## 0.3.0 - 2026-07-08
