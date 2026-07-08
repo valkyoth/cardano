@@ -6,7 +6,7 @@ Most users should depend on the facade crate instead:
 
 ```toml
 [dependencies]
-cardano = "0.3"
+cardano = "0.4"
 ```
 
 Crates.io: <https://crates.io/crates/cardano>
@@ -18,6 +18,8 @@ auditable crate boundaries. Treat it as a lower-level building block unless the
 Implemented scope includes network identifiers, eras, slots, epochs, block
 numbers, coins, transaction identifiers, block hashes, datum hashes, script
 hashes, key hashes, policy identifiers, credentials, and bounded asset names.
+It also exposes the shared stable Cardano error taxonomy used by public
+protocol-facing APIs.
 
 This crate does not implement CBOR, address parsing, ledger validation, script
 execution, node protocols, signing, query transports, or wallet behavior.

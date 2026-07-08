@@ -2,14 +2,17 @@
 #![forbid(unsafe_code)]
 #![doc = include_str!("../README.md")]
 
-#[cfg(feature = "std")]
+#[cfg(any(feature = "std", test))]
 extern crate std;
 
 use core::{
     cmp::Ordering,
-    fmt,
     hash::{Hash, Hasher},
 };
+
+mod error;
+
+pub use error::{ErrorCategory, ErrorCode, PrimitiveError};
 
 /// Network id for transaction-body network discriminants.
 ///
@@ -402,61 +405,6 @@ impl Ord for AssetName {
         self.as_bytes().cmp(other.as_bytes())
     }
 }
-
-/// Primitive constructor failures.
-#[non_exhaustive]
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub enum PrimitiveError {
-    /// Network id is not one of the transaction-body network ids.
-    InvalidNetworkId {
-        /// Rejected value.
-        value: u8,
-    },
-    /// Credential tag is not one of the CDDL credential tags.
-    InvalidCredentialTag {
-        /// Rejected value.
-        value: u8,
-    },
-    /// Fixed-width byte value used the wrong length.
-    InvalidByteLength {
-        /// Expected byte length.
-        expected: usize,
-        /// Actual byte length.
-        actual: usize,
-    },
-    /// Asset name exceeded the Cardano maximum length.
-    AssetNameTooLong {
-        /// Maximum accepted byte length.
-        max: usize,
-        /// Actual byte length.
-        actual: usize,
-    },
-}
-
-impl fmt::Display for PrimitiveError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            Self::InvalidNetworkId { value } => {
-                write!(f, "invalid Cardano network id: {value}")
-            }
-            Self::InvalidCredentialTag { value } => {
-                write!(f, "invalid Cardano credential tag: {value}")
-            }
-            Self::InvalidByteLength { expected, actual } => {
-                write!(
-                    f,
-                    "invalid Cardano primitive byte length: expected {expected}, actual {actual}"
-                )
-            }
-            Self::AssetNameTooLong { max, actual } => {
-                write!(f, "Cardano asset name too long: max {max}, actual {actual}")
-            }
-        }
-    }
-}
-
-#[cfg(feature = "std")]
-impl std::error::Error for PrimitiveError {}
 
 /// Current crate version.
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

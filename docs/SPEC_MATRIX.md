@@ -1,6 +1,6 @@
 # cardano Specification Matrix
 
-Status: `v0.3.0` primitive domain newtypes are implemented and waiting for
+Status: `v0.4.0` stable error model is implemented and waiting for
 pentest.
 
 Official source and fixture revisions are governed by
@@ -15,6 +15,7 @@ families and workflow; later milestones must pin exact revisions in
 | Ouroboros network source | pinned | `ouroboros-network` revision `b47dbc2c29108e593cc47524cffb75008b88fe90` recorded in `spec-lock.toml` |
 | CIPs | pinned | `CIPs` revision `20c819b25abee6551a3ef51778b975e7463e1269` recorded in `spec-lock.toml` |
 | Primitive domains | implemented | `cardano-valkyoth-primitives` implements network id, era, slot, epoch, block number, coin, hash/id, credential, policy id, and asset-name domains from pinned Conway CDDL evidence |
+| Stable error model | implemented | `cardano-valkyoth-primitives` exposes stable categories, codes, and static messages; `cardano` re-exports them through `cardano::error` |
 | CDDL and CBOR | planned | CBOR/CDDL codec milestone must pin CDDL source revisions before implementation |
 | Address formats | planned | Address milestone must pin relevant ledger/CIP source revisions before implementation |
 | Era model | primitive names only | `cardano-valkyoth-primitives::Era` names known ledger eras; era-specific ledger behavior remains planned |

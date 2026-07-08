@@ -9,5 +9,10 @@
 
 pub use cardano_valkyoth_primitives as primitives;
 
+/// Stable Cardano error model re-exported by the facade crate.
+pub mod error {
+    pub use cardano_valkyoth_primitives::{ErrorCategory, ErrorCode, PrimitiveError};
+}
+
 /// Current crate version.
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

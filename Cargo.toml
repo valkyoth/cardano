@@ -49,7 +49,7 @@ cardano-valkyoth-crypto = { path = "crates/cardano-valkyoth-crypto", version = "
 cardano-valkyoth-governance = { path = "crates/cardano-valkyoth-governance", version = "0.1.0" }
 cardano-valkyoth-ledger = { path = "crates/cardano-valkyoth-ledger", version = "0.1.0" }
 cardano-valkyoth-node = { path = "crates/cardano-valkyoth-node", version = "0.1.0" }
-cardano-valkyoth-primitives = { path = "crates/cardano-valkyoth-primitives", version = "0.2.0" }
+cardano-valkyoth-primitives = { path = "crates/cardano-valkyoth-primitives", version = "0.3.0" }
 cardano-valkyoth-rpc = { path = "crates/cardano-valkyoth-rpc", version = "0.1.0" }
 cardano-valkyoth-sanitization = { path = "crates/cardano-valkyoth-sanitization", version = "0.1.0" }
 cardano-valkyoth-script = { path = "crates/cardano-valkyoth-script", version = "0.1.0" }

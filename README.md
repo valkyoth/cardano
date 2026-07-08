@@ -37,8 +37,8 @@ behavior become real dependencies.
 
 ## Current Status
 
-Status: `v0.3.0` tagged baseline; next milestones continue the domain,
-encoding, validation, and full-implementation roadmap toward `1.0.0`.
+Status: `v0.4.0` stable-error-model implementation stop reached;
+waiting for pentest.
 
 Implemented now:
 
@@ -60,6 +60,8 @@ Implemented now:
 - Explicit primitive domains for network ids, eras, slots, epochs, block
   numbers, coins, transaction ids, block hashes, datum hashes, script hashes,
   key hashes, policy ids, credentials, and bounded asset names.
+- Stable error categories, machine-readable codes, and static messages for
+  public protocol-facing APIs.
 
 Not implemented yet:
 
@@ -96,7 +98,7 @@ Not implemented yet:
 
 ```toml
 [dependencies]
-cardano = "0.3"
+cardano = "0.4"
 ```
 
 ## Features

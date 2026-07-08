@@ -2,7 +2,17 @@
 
 All notable changes to `cardano` will be documented here.
 
-## 0.3.0 - Unreleased
+## 0.4.0 - Unreleased
+
+- Added a stable Cardano error taxonomy with categories for primitive, codec,
+  address, ledger, script, governance, feature, resource, source-lock, and
+  verification failures.
+- Added stable machine-readable error codes and static messages for primitive
+  constructor failures.
+- Re-exported the stable error model through the `cardano` facade crate.
+- Added the explicit `scripts/release_0_4_gate.sh` milestone gate.
+
+## 0.3.0 - 2026-07-08
 
 - Added explicit Cardano primitive domains for network ids, eras, slots,
   epochs, block numbers, coins, transaction ids, block hashes, datum hashes,

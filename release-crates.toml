@@ -1,93 +1,93 @@
 [release]
-version = "0.3.0"
+version = "0.4.0"
 
 [crates.cardano-valkyoth-cbor]
 previous_version = "0.1.0"
 version = "0.1.0"
 change = "unchanged"
 publish = false
-reason = "No crate changes in the v0.3.0 domain-newtypes milestone."
+reason = "No crate changes in the v0.4.0 stable-error-model milestone."
 
 [crates.cardano-valkyoth-primitives]
-previous_version = "0.1.0"
-version = "0.2.0"
+previous_version = "0.2.0"
+version = "0.3.0"
 change = "code"
 publish = true
-reason = "Adds explicit Cardano primitive domain newtypes and bounded constructors."
+reason = "Adds the stable Cardano error taxonomy, codes, messages, and primitive error accessors."
 
 [crates.cardano-valkyoth-crypto]
 previous_version = "0.1.0"
 version = "0.1.0"
 change = "unchanged"
 publish = false
-reason = "No crate changes in the v0.3.0 domain-newtypes milestone."
+reason = "No crate changes in the v0.4.0 stable-error-model milestone."
 
 [crates.cardano-valkyoth-address]
 previous_version = "0.1.0"
 version = "0.1.0"
 change = "unchanged"
 publish = false
-reason = "No crate changes in the v0.3.0 domain-newtypes milestone."
+reason = "No crate changes in the v0.4.0 stable-error-model milestone."
 
 [crates.cardano-valkyoth-ledger]
 previous_version = "0.1.0"
 version = "0.1.0"
 change = "unchanged"
 publish = false
-reason = "No crate changes in the v0.3.0 domain-newtypes milestone."
+reason = "No crate changes in the v0.4.0 stable-error-model milestone."
 
 [crates.cardano-valkyoth-script]
 previous_version = "0.1.0"
 version = "0.1.0"
 change = "unchanged"
 publish = false
-reason = "No crate changes in the v0.3.0 domain-newtypes milestone."
+reason = "No crate changes in the v0.4.0 stable-error-model milestone."
 
 [crates.cardano-valkyoth-governance]
 previous_version = "0.1.0"
 version = "0.1.0"
 change = "unchanged"
 publish = false
-reason = "No crate changes in the v0.3.0 domain-newtypes milestone."
+reason = "No crate changes in the v0.4.0 stable-error-model milestone."
 
 [crates.cardano-valkyoth-node]
 previous_version = "0.1.0"
 version = "0.1.0"
 change = "unchanged"
 publish = false
-reason = "No crate changes in the v0.3.0 domain-newtypes milestone."
+reason = "No crate changes in the v0.4.0 stable-error-model milestone."
 
 [crates.cardano-valkyoth-rpc]
 previous_version = "0.1.0"
 version = "0.1.0"
 change = "unchanged"
 publish = false
-reason = "No crate changes in the v0.3.0 domain-newtypes milestone."
+reason = "No crate changes in the v0.4.0 stable-error-model milestone."
 
 [crates.cardano-valkyoth-sanitization]
 previous_version = "0.1.0"
 version = "0.1.0"
 change = "unchanged"
 publish = false
-reason = "No crate changes in the v0.3.0 domain-newtypes milestone."
+reason = "No crate changes in the v0.4.0 stable-error-model milestone."
 
 [crates.cardano-valkyoth-signer]
 previous_version = "0.1.0"
 version = "0.1.0"
 change = "unchanged"
 publish = false
-reason = "No crate changes in the v0.3.0 domain-newtypes milestone."
+reason = "No crate changes in the v0.4.0 stable-error-model milestone."
 
 [crates.cardano-valkyoth-testkit]
 previous_version = "0.1.0"
 version = "0.1.0"
 change = "unchanged"
 publish = false
-reason = "No crate changes in the v0.3.0 domain-newtypes milestone."
+reason = "No crate changes in the v0.4.0 stable-error-model milestone."
 
 [crates.cardano]
-previous_version = "0.2.0"
-version = "0.3.0"
+previous_version = "0.3.0"
+version = "0.4.0"
 change = "code"
 publish = true
-reason = "Re-exports the primitives crate and publishes the v0.3.0 repository README."
+reason = "Re-exports the stable error model and publishes the v0.4.0 repository README."

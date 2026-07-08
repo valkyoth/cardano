@@ -1,8 +1,9 @@
 use super::{
-    AssetName, BlockHash, BlockNumber, Coin, Credential, DatumHash, Epoch, Era, KeyHash, NetworkId,
-    PolicyId, PrimitiveError, ScriptHash, Slot, TransactionId,
+    AssetName, BlockHash, BlockNumber, Coin, Credential, DatumHash, Epoch, Era, ErrorCategory,
+    ErrorCode, KeyHash, NetworkId, PolicyId, PrimitiveError, ScriptHash, Slot, TransactionId,
 };
 use core::hash::{Hash, Hasher};
+use std::string::ToString;
 
 #[test]
 fn network_id_round_trips() {
@@ -121,6 +122,84 @@ fn asset_name_rejects_more_than_thirty_two_bytes() {
             max: 32,
             actual: 33
         })
+    );
+}
+
+#[test]
+fn stable_error_categories_have_stable_labels() {
+    assert_eq!(ErrorCategory::Primitive.as_str(), "primitive");
+    assert_eq!(ErrorCategory::Codec.as_str(), "codec");
+    assert_eq!(ErrorCategory::Address.as_str(), "address");
+    assert_eq!(ErrorCategory::Ledger.as_str(), "ledger");
+    assert_eq!(ErrorCategory::Script.as_str(), "script");
+    assert_eq!(ErrorCategory::Governance.as_str(), "governance");
+    assert_eq!(ErrorCategory::Feature.as_str(), "feature");
+    assert_eq!(ErrorCategory::Resource.as_str(), "resource");
+    assert_eq!(ErrorCategory::SourceLock.as_str(), "source_lock");
+    assert_eq!(ErrorCategory::Verification.as_str(), "verification");
+}
+
+#[test]
+fn stable_error_codes_have_categories_and_messages() {
+    assert_eq!(
+        ErrorCode::PrimitiveInvalidNetworkId.as_str(),
+        "cardano.primitive.invalid_network_id"
+    );
+    assert_eq!(
+        ErrorCode::CodecMalformedInput.category(),
+        ErrorCategory::Codec
+    );
+    assert_eq!(
+        ErrorCode::AddressMalformedInput.category(),
+        ErrorCategory::Address
+    );
+    assert_eq!(
+        ErrorCode::LedgerValidationFailed.category(),
+        ErrorCategory::Ledger
+    );
+    assert_eq!(
+        ErrorCode::ScriptValidationFailed.category(),
+        ErrorCategory::Script
+    );
+    assert_eq!(
+        ErrorCode::GovernanceValidationFailed.category(),
+        ErrorCategory::Governance
+    );
+    assert_eq!(
+        ErrorCode::FeatureUnsupported.category(),
+        ErrorCategory::Feature
+    );
+    assert_eq!(
+        ErrorCode::ResourceLimitExceeded.category(),
+        ErrorCategory::Resource
+    );
+    assert_eq!(
+        ErrorCode::SourceLockMismatch.category(),
+        ErrorCategory::SourceLock
+    );
+    assert_eq!(
+        ErrorCode::VerificationFailed.category(),
+        ErrorCategory::Verification
+    );
+    assert_eq!(
+        ErrorCode::PrimitiveAssetNameTooLong.message(),
+        "Cardano asset name exceeds 32 bytes"
+    );
+}
+
+#[test]
+fn primitive_errors_expose_stable_codes_and_messages() {
+    let error = PrimitiveError::InvalidByteLength {
+        expected: 32,
+        actual: 31,
+    };
+
+    assert_eq!(error.category(), ErrorCategory::Primitive);
+    assert_eq!(error.code(), ErrorCode::PrimitiveInvalidByteLength);
+    assert_eq!(error.message(), "invalid Cardano primitive byte length");
+    assert_eq!(
+        error.to_string(),
+        "cardano.primitive.invalid_byte_length: invalid Cardano primitive byte length"
     );
 }
 

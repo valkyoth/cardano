@@ -1,6 +1,6 @@
 # Crate Version Matrix
 
-Status: `v0.3.0` domain-newtypes milestone.
+Status: `v0.4.0` stable-error-model milestone.
 
 ## Version Rules
 
@@ -75,3 +75,25 @@ version and re-exports the primitives crate.
 | `cardano-valkyoth-signer` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
 | `cardano-valkyoth-testkit` | `0.1.0` | unchanged | no | No crate changes in the v0.3.0 domain-newtypes milestone. |
 | `cardano` | `0.3.0` | code | yes | Re-exports the primitives crate and publishes the v0.3.0 repository README. |
+
+## v0.4.0 Tracking Table
+
+`v0.4.0` adds the stable error model. The primitives support crate receives an
+independent minor bump for the shared error taxonomy; the facade crate uses the
+milestone version and re-exports the error model.
+
+| Crate | Version | Change | Publish | Reason |
+| --- | --- | --- | --- | --- |
+| `cardano-valkyoth-cbor` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
+| `cardano-valkyoth-primitives` | `0.3.0` | code | yes | Adds the stable Cardano error taxonomy, codes, messages, and primitive error accessors. |
+| `cardano-valkyoth-crypto` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
+| `cardano-valkyoth-address` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
+| `cardano-valkyoth-ledger` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
+| `cardano-valkyoth-script` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
+| `cardano-valkyoth-governance` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
+| `cardano-valkyoth-node` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
+| `cardano-valkyoth-rpc` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
+| `cardano-valkyoth-sanitization` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
+| `cardano-valkyoth-signer` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
+| `cardano-valkyoth-testkit` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
+| `cardano` | `0.4.0` | code | yes | Re-exports the stable error model and publishes the v0.4.0 repository README. |
