@@ -1,3 +1,28 @@
+<p align="center">
+  <b>bounded no_std Cardano CBOR/CDDL policy for cardano.</b><br>
+  Explicit domains, bounded CBOR/CDDL policy, full Cardano implementation work, and security-gated release evidence.
+</p>
+
+<div align="center">
+  <a href="https://crates.io/crates/cardano">cardano crate</a>
+  |
+  <a href="https://docs.rs/cardano-valkyoth-cbor">Docs.rs</a>
+  |
+  <a href="https://github.com/valkyoth/cardano/blob/main/docs/RELEASE_PLAN.md">Release Plan</a>
+  |
+  <a href="https://github.com/valkyoth/cardano/blob/main/docs/threat-model.md">Threat Model</a>
+  |
+  <a href="https://github.com/valkyoth/cardano/blob/main/SECURITY.md">Security</a>
+</div>
+
+<br>
+
+<p align="center">
+  <a href="https://github.com/valkyoth/cardano">
+    <img src="https://raw.githubusercontent.com/valkyoth/cardano/main/.github/images/cardano.webp" alt="cardano Rust crate overview">
+  </a>
+</p>
+
 # cardano-valkyoth-cbor
 
 Support crate for `cardano`: bounded `no_std` Cardano CBOR and CDDL policy.
