@@ -7,8 +7,9 @@ Status: implementation stop reached; pentest required before tagging.
 - Added `DecodeBudget` for explicit untrusted byte-decoding resource limits.
 - Added `DecodeBudgetTracker` for cumulative parser work accounting.
 - Added fail-closed `DecodeBudgetError` variants for input bytes, nesting
-  depth, item count, map-entry count, allocation bytes, decoded values, and
-  invalid nesting-state use.
+  depth, item count, map-entry count, allocation bytes, and decoded values.
+- Added RAII `NestedBudget` scopes so recursive decoders retain nesting-budget
+  state for the full nested operation.
 - Re-exported the CBOR budget model through the `cardano` facade crate.
 - Added `scripts/release_0_5_gate.sh` for the decode-budget-model milestone.
 
@@ -16,9 +17,8 @@ Status: implementation stop reached; pentest required before tagging.
 
 - Future untrusted parsers now have a shared explicit budget boundary before
   scalar, array, map, address, ledger, or script decoders are admitted.
-- Future recursive decoders must call `DecodeBudgetTracker::enter_nested()`
-  and check its result before descending into nested arrays, maps, tags, or
-  container values.
+- Future recursive decoders must hold `DecodeBudgetTracker::nested()` guards
+  while descending into nested arrays, maps, tags, or container values.
 - Budget errors preserve non-secret diagnostic counters for audit-log
   forensics.
 - No CBOR scalar parser, address parser, ledger validation, networking,

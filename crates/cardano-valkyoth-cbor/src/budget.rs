@@ -1,4 +1,7 @@
-use core::fmt;
+use core::{
+    fmt,
+    ops::{Deref, DerefMut},
+};
 
 /// Static resource limits for untrusted Cardano byte decoding.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -73,7 +76,7 @@ impl DecodeBudget {
 }
 
 /// Stateful accounting for one untrusted decode operation.
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Debug, Eq, PartialEq)]
 pub struct DecodeBudgetTracker {
     budget: DecodeBudget,
     input_bytes: usize,
@@ -85,9 +88,7 @@ pub struct DecodeBudgetTracker {
 }
 
 impl DecodeBudgetTracker {
-    /// Creates a tracker with no accounted work yet.
-    #[must_use]
-    pub const fn new(budget: DecodeBudget) -> Self {
+    const fn new_internal(budget: DecodeBudget) -> Self {
         Self {
             budget,
             input_bytes: 0,
@@ -100,56 +101,55 @@ impl DecodeBudgetTracker {
     }
 
     /// Creates a tracker and immediately accounts the input byte length.
-    pub fn for_input(budget: DecodeBudget, input_bytes: usize) -> Result<Self, DecodeBudgetError> {
-        let mut tracker = Self::new(budget);
-        tracker.account_input_bytes(input_bytes)?;
+    pub fn for_input(budget: DecodeBudget, input: &[u8]) -> Result<Self, DecodeBudgetError> {
+        let mut tracker = Self::new_internal(budget);
+        tracker.account_input_bytes(input.len())?;
         Ok(tracker)
     }
 
     /// Returns the configured budget.
     #[must_use]
-    pub const fn budget(self) -> DecodeBudget {
+    pub const fn budget(&self) -> DecodeBudget {
         self.budget
     }
 
     /// Returns accounted input bytes.
     #[must_use]
-    pub const fn input_bytes(self) -> usize {
+    pub const fn input_bytes(&self) -> usize {
         self.input_bytes
     }
 
     /// Returns the current nesting depth.
     #[must_use]
-    pub const fn nesting_depth(self) -> usize {
+    pub const fn nesting_depth(&self) -> usize {
         self.nesting_depth
     }
 
     /// Returns accounted cumulative container items.
     #[must_use]
-    pub const fn items(self) -> usize {
+    pub const fn items(&self) -> usize {
         self.items
     }
 
     /// Returns accounted cumulative map entries.
     #[must_use]
-    pub const fn map_entries(self) -> usize {
+    pub const fn map_entries(&self) -> usize {
         self.map_entries
     }
 
     /// Returns accounted cumulative allocation bytes.
     #[must_use]
-    pub const fn allocation_bytes(self) -> usize {
+    pub const fn allocation_bytes(&self) -> usize {
         self.allocation_bytes
     }
 
     /// Returns accounted cumulative decoded values.
     #[must_use]
-    pub const fn values(self) -> usize {
+    pub const fn values(&self) -> usize {
         self.values
     }
 
-    /// Accounts untrusted input bytes.
-    pub fn account_input_bytes(&mut self, bytes: usize) -> Result<(), DecodeBudgetError> {
+    fn account_input_bytes(&mut self, bytes: usize) -> Result<(), DecodeBudgetError> {
         self.input_bytes = checked_total(
             BudgetField::InputBytes,
             self.input_bytes,
@@ -159,24 +159,15 @@ impl DecodeBudgetTracker {
         Ok(())
     }
 
-    /// Enters one nested value scope.
-    pub fn enter_nested(&mut self) -> Result<(), DecodeBudgetError> {
+    /// Enters one nested value scope for the lifetime of the returned guard.
+    pub fn nested(&mut self) -> Result<NestedBudget<'_>, DecodeBudgetError> {
         self.nesting_depth = checked_total(
             BudgetField::NestingDepth,
             self.nesting_depth,
             1,
             self.budget.max_nesting_depth,
         )?;
-        Ok(())
-    }
-
-    /// Leaves one nested value scope.
-    pub fn leave_nested(&mut self) -> Result<(), DecodeBudgetError> {
-        let Some(next) = self.nesting_depth.checked_sub(1) else {
-            return Err(DecodeBudgetError::NestingUnderflow);
-        };
-        self.nesting_depth = next;
-        Ok(())
+        Ok(NestedBudget { tracker: self })
     }
 
     /// Accounts cumulative decoded container items.
@@ -229,6 +220,32 @@ impl DecodeBudgetTracker {
     }
 }
 
+/// Active nested decode-budget scope.
+#[derive(Debug, Eq, PartialEq)]
+pub struct NestedBudget<'a> {
+    tracker: &'a mut DecodeBudgetTracker,
+}
+
+impl Deref for NestedBudget<'_> {
+    type Target = DecodeBudgetTracker;
+
+    fn deref(&self) -> &Self::Target {
+        self.tracker
+    }
+}
+
+impl DerefMut for NestedBudget<'_> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        self.tracker
+    }
+}
+
+impl Drop for NestedBudget<'_> {
+    fn drop(&mut self) {
+        self.tracker.nesting_depth = self.tracker.nesting_depth.saturating_sub(1);
+    }
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 enum BudgetField {
     InputBytes,
@@ -266,6 +283,7 @@ fn error_for(field: BudgetField, max: usize, actual: usize) -> DecodeBudgetError
 }
 
 /// Stable high-level decode-budget error category.
+#[non_exhaustive]
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub enum DecodeBudgetErrorCategory {
     /// The operation exceeded an explicit resource limit.

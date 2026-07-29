@@ -11,7 +11,10 @@ description = "no_std-first Cardano protocol building blocks for Rust."
 
 [features]
 default = []
-std = []
+std = [
+    "cardano-valkyoth-cbor/std",
+    "cardano-valkyoth-primitives/std",
+]
 node = []
 rpc = []
 sanitization = []

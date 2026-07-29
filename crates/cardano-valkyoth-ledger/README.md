@@ -31,7 +31,7 @@ Most users should depend on the facade crate instead:
 
 ```toml
 [dependencies]
-cardano = "0.2"
+cardano = "0.5"
 ```
 
 Crates.io: <https://crates.io/crates/cardano>

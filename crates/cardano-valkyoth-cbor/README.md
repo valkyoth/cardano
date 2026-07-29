@@ -43,6 +43,8 @@ auditable crate boundaries. Treat it as a lower-level building block unless the
 Implemented scope includes explicit decode budgets and stateful accounting for
 input bytes, nesting depth, item count, map-entry count, allocation bytes, and
 decoded values. This release does not decode CBOR scalars yet.
+Nested decode paths use RAII budget guards so nesting depth remains accounted
+for the full recursive scope.
 
 The planned parser surface is covered by the workspace fuzzing policy. See the
 project fuzzing guide for target names, committed seed corpus handling, and

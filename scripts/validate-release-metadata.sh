@@ -36,3 +36,6 @@ grep -q 'license = "MIT OR Apache-2.0"' Cargo.toml
 grep -q 'repository = "https://github.com/valkyoth/cardano"' Cargo.toml
 grep -q 'channel = "1.96.1"' rust-toolchain.toml
 grep -q 'rust-version = "1.90"' Cargo.toml
+for readme in crates/cardano-valkyoth-*/README.md; do
+    grep -q 'cardano = "0.5"' "$readme"
+done
