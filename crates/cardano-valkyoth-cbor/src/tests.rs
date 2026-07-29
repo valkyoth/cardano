@@ -71,6 +71,37 @@ fn nested_guard_tracks_depth_for_scope_lifetime() -> Result<(), DecodeBudgetErro
 }
 
 #[test]
+fn nested_guard_rejects_excess_depth() -> Result<(), DecodeBudgetError> {
+    let mut tracker = DecodeBudgetTracker::for_input(BUDGET, &[])?;
+    let mut first = tracker.nested()?;
+    let mut second = first.nested()?;
+
+    assert!(matches!(
+        second.nested(),
+        Err(DecodeBudgetError::NestingTooDeep { max: 2, actual: 3 })
+    ));
+    assert_eq!(second.nesting_depth(), 2);
+    Ok(())
+}
+
+#[test]
+fn nested_guard_restores_depth_after_early_error() -> Result<(), DecodeBudgetError> {
+    fn fail_while_nested(tracker: &mut DecodeBudgetTracker) -> Result<(), DecodeBudgetError> {
+        let _nested = tracker.nested()?;
+        Err(DecodeBudgetError::TooManyValues { max: 0, actual: 1 })
+    }
+
+    let mut tracker = DecodeBudgetTracker::for_input(BUDGET, &[])?;
+
+    assert_eq!(
+        fail_while_nested(&mut tracker),
+        Err(DecodeBudgetError::TooManyValues { max: 0, actual: 1 })
+    );
+    assert_eq!(tracker.nesting_depth(), 0);
+    Ok(())
+}
+
+#[test]
 fn tracker_fails_closed_on_items() -> Result<(), DecodeBudgetError> {
     let mut tracker = DecodeBudgetTracker::for_input(BUDGET, &[])?;
 

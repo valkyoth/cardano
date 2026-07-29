@@ -221,7 +221,8 @@ impl DecodeBudgetTracker {
 }
 
 /// Active nested decode-budget scope.
-#[derive(Debug, Eq, PartialEq)]
+#[must_use = "the nesting guard must be held for the entire nested decode"]
+#[derive(Debug)]
 pub struct NestedBudget<'a> {
     tracker: &'a mut DecodeBudgetTracker,
 }
@@ -288,8 +289,6 @@ fn error_for(field: BudgetField, max: usize, actual: usize) -> DecodeBudgetError
 pub enum DecodeBudgetErrorCategory {
     /// The operation exceeded an explicit resource limit.
     ResourceExhaustion,
-    /// The tracker was used in an invalid state.
-    InvalidState,
 }
 
 /// Decode-budget accounting failure.
@@ -338,8 +337,6 @@ pub enum DecodeBudgetError {
         /// Actual attempted total.
         actual: usize,
     },
-    /// A caller attempted to leave nesting depth zero.
-    NestingUnderflow,
 }
 
 impl DecodeBudgetError {
@@ -347,7 +344,6 @@ impl DecodeBudgetError {
     #[must_use]
     pub const fn category(self) -> DecodeBudgetErrorCategory {
         match self {
-            Self::NestingUnderflow => DecodeBudgetErrorCategory::InvalidState,
             Self::InputTooLarge { .. }
             | Self::NestingTooDeep { .. }
             | Self::TooManyItems { .. }
@@ -367,7 +363,6 @@ impl DecodeBudgetError {
             Self::TooManyMapEntries { .. } => "cardano.cbor.budget.too_many_map_entries",
             Self::AllocationTooLarge { .. } => "cardano.cbor.budget.allocation_too_large",
             Self::TooManyValues { .. } => "cardano.cbor.budget.too_many_values",
-            Self::NestingUnderflow => "cardano.cbor.budget.nesting_underflow",
         }
     }
 
@@ -381,7 +376,6 @@ impl DecodeBudgetError {
             Self::TooManyMapEntries { .. } => "Cardano CBOR map-entry count exceeds decode budget",
             Self::AllocationTooLarge { .. } => "Cardano CBOR allocation bytes exceed decode budget",
             Self::TooManyValues { .. } => "Cardano CBOR value count exceeds decode budget",
-            Self::NestingUnderflow => "Cardano CBOR nesting tracker underflow",
         }
     }
 }
@@ -398,7 +392,6 @@ impl fmt::Display for DecodeBudgetError {
             | Self::TooManyValues { max, actual } => {
                 write!(f, " (max={max}, actual={actual})")
             }
-            Self::NestingUnderflow => Ok(()),
         }
     }
 }
