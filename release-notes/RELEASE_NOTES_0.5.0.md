@@ -11,6 +11,10 @@ Status: implementation stop reached; pentest required before tagging.
 - Added RAII `NestedBudget` scopes so recursive decoders retain nesting-budget
   state for the full nested operation.
 - Re-exported the CBOR budget model through the `cardano` facade crate.
+- Propagated the facade `std` feature into admitted CBOR and primitive
+  dependencies.
+- Updated support-crate README dependency examples to recommend
+  `cardano = "0.5"`.
 - Added `scripts/release_0_5_gate.sh` for the decode-budget-model milestone.
 
 ## Security
@@ -19,6 +23,8 @@ Status: implementation stop reached; pentest required before tagging.
   scalar, array, map, address, ledger, or script decoders are admitted.
 - Future recursive decoders must hold `DecodeBudgetTracker::nested()` guards
   while descending into nested arrays, maps, tags, or container values.
+- Workspace clippy denies explicitly discarded must-use values so nested budget
+  guards cannot be suppressed with `let _ = ...`.
 - Budget errors preserve non-secret diagnostic counters for audit-log
   forensics.
 - No CBOR scalar parser, address parser, ledger validation, networking,

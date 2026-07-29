@@ -106,7 +106,7 @@ and re-exports the budget API.
 
 | Crate | Version | Change | Publish | Reason |
 | --- | --- | --- | --- | --- |
-| `cardano-valkyoth-cbor` | `0.2.0` | code | yes | Adds explicit decode-budget limits, stateful accounting, and fail-closed resource errors. |
+| `cardano-valkyoth-cbor` | `0.2.0` | code | yes | Adds explicit decode-budget limits, stateful accounting, RAII nesting guards, and fail-closed resource errors. |
 | `cardano-valkyoth-primitives` | `0.3.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
 | `cardano-valkyoth-crypto` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
 | `cardano-valkyoth-address` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
@@ -118,4 +118,4 @@ and re-exports the budget API.
 | `cardano-valkyoth-sanitization` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
 | `cardano-valkyoth-signer` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
 | `cardano-valkyoth-testkit` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
-| `cardano` | `0.5.0` | code | yes | Re-exports the CBOR decode-budget model and publishes the v0.5.0 repository README. |
+| `cardano` | `0.5.0` | code | yes | Re-exports the CBOR decode-budget model, propagates admitted `std` features, and publishes the v0.5.0 repository README. |

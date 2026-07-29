@@ -10,6 +10,13 @@ All notable changes to `cardano` will be documented here.
   allocation, and decoded-value accounting.
 - Added fail-closed decode-budget resource errors with stable codes, messages,
   categories, and non-secret diagnostic counters.
+- Added RAII `NestedBudget` scopes and must-use enforcement for recursive
+  decoder nesting-budget accounting.
+- Hardened the workspace lint policy so explicitly discarded must-use values
+  are denied by clippy.
+- Propagated the facade `std` feature into admitted core dependencies.
+- Updated support-crate README dependency examples to recommend
+  `cardano = "0.5"` and added metadata validation for those examples.
 - Re-exported the CBOR budget model through the `cardano` facade crate.
 - Added the explicit `scripts/release_0_5_gate.sh` milestone gate.
 
