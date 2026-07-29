@@ -16,6 +16,9 @@ Status: implementation stop reached; pentest required before tagging.
 
 - Future untrusted parsers now have a shared explicit budget boundary before
   scalar, array, map, address, ledger, or script decoders are admitted.
+- Future recursive decoders must call `DecodeBudgetTracker::enter_nested()`
+  and check its result before descending into nested arrays, maps, tags, or
+  container values.
 - Budget errors preserve non-secret diagnostic counters for audit-log
   forensics.
 - No CBOR scalar parser, address parser, ledger validation, networking,

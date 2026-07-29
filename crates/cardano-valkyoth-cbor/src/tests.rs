@@ -38,6 +38,22 @@ fn tracker_fails_closed_on_input_byte_overflow() {
 }
 
 #[test]
+fn tracker_fails_closed_on_true_integer_overflow() {
+    let budget = DecodeBudget::new(usize::MAX, 2, 3, 2, 5, 3);
+    let mut tracker = DecodeBudgetTracker::new(budget);
+
+    assert_eq!(tracker.account_input_bytes(usize::MAX), Ok(()));
+    assert_eq!(
+        tracker.account_input_bytes(1),
+        Err(DecodeBudgetError::InputTooLarge {
+            max: usize::MAX,
+            actual: usize::MAX
+        })
+    );
+    assert_eq!(tracker.input_bytes(), usize::MAX);
+}
+
+#[test]
 fn tracker_fails_closed_on_nesting_depth() {
     let mut tracker = DecodeBudgetTracker::new(BUDGET);
 
