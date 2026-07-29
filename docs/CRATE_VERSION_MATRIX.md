@@ -1,6 +1,6 @@
 # Crate Version Matrix
 
-Status: `v0.4.0` stable-error-model milestone.
+Status: `v0.5.0` decode-budget-model milestone.
 
 ## Version Rules
 
@@ -97,3 +97,25 @@ milestone version and re-exports the error model.
 | `cardano-valkyoth-signer` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
 | `cardano-valkyoth-testkit` | `0.1.0` | unchanged | no | No crate changes in the v0.4.0 stable-error-model milestone. |
 | `cardano` | `0.4.0` | code | yes | Re-exports the stable error model and publishes the v0.4.0 repository README. |
+
+## v0.5.0 Tracking Table
+
+`v0.5.0` adds the shared decode-budget model. The CBOR support crate receives
+its first independent minor bump; the facade crate uses the milestone version
+and re-exports the budget API.
+
+| Crate | Version | Change | Publish | Reason |
+| --- | --- | --- | --- | --- |
+| `cardano-valkyoth-cbor` | `0.2.0` | code | yes | Adds explicit decode-budget limits, stateful accounting, and fail-closed resource errors. |
+| `cardano-valkyoth-primitives` | `0.3.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
+| `cardano-valkyoth-crypto` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
+| `cardano-valkyoth-address` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
+| `cardano-valkyoth-ledger` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
+| `cardano-valkyoth-script` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
+| `cardano-valkyoth-governance` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
+| `cardano-valkyoth-node` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
+| `cardano-valkyoth-rpc` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
+| `cardano-valkyoth-sanitization` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
+| `cardano-valkyoth-signer` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
+| `cardano-valkyoth-testkit` | `0.1.0` | unchanged | no | No crate changes in the v0.5.0 decode-budget-model milestone. |
+| `cardano` | `0.5.0` | code | yes | Re-exports the CBOR decode-budget model and publishes the v0.5.0 repository README. |

@@ -31,7 +31,7 @@ Most users should depend on the facade crate instead:
 
 ```toml
 [dependencies]
-cardano = "0.2"
+cardano = "0.5"
 ```
 
 Crates.io: <https://crates.io/crates/cardano>
@@ -39,6 +39,10 @@ Crates.io: <https://crates.io/crates/cardano>
 This package is published separately so the `cardano` workspace can keep small,
 auditable crate boundaries. Treat it as a lower-level building block unless the
 `cardano` documentation explicitly says otherwise.
+
+Implemented scope includes explicit decode budgets and stateful accounting for
+input bytes, nesting depth, item count, map-entry count, allocation bytes, and
+decoded values. This release does not decode CBOR scalars yet.
 
 The planned parser surface is covered by the workspace fuzzing policy. See the
 project fuzzing guide for target names, committed seed corpus handling, and

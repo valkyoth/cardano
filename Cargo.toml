@@ -44,7 +44,7 @@ cast_sign_loss = "deny"
 
 [workspace.dependencies]
 cardano-valkyoth-address = { path = "crates/cardano-valkyoth-address", version = "0.1.0" }
-cardano-valkyoth-cbor = { path = "crates/cardano-valkyoth-cbor", version = "0.1.0" }
+cardano-valkyoth-cbor = { path = "crates/cardano-valkyoth-cbor", version = "0.2.0" }
 cardano-valkyoth-crypto = { path = "crates/cardano-valkyoth-crypto", version = "0.1.0" }
 cardano-valkyoth-governance = { path = "crates/cardano-valkyoth-governance", version = "0.1.0" }
 cardano-valkyoth-ledger = { path = "crates/cardano-valkyoth-ledger", version = "0.1.0" }

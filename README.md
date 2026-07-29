@@ -37,7 +37,7 @@ behavior become real dependencies.
 
 ## Current Status
 
-Status: `v0.4.0` stable-error-model implementation stop reached;
+Status: `v0.5.0` decode-budget-model implementation stop reached;
 waiting for pentest.
 
 Implemented now:
@@ -62,6 +62,9 @@ Implemented now:
   key hashes, policy ids, credentials, and bounded asset names.
 - Stable error categories, machine-readable codes, and static messages for
   public protocol-facing APIs.
+- Explicit CBOR decode budgets and stateful accounting for input bytes,
+  nesting depth, item count, map-entry count, allocation bytes, and decoded
+  values.
 
 Not implemented yet:
 
@@ -98,7 +101,7 @@ Not implemented yet:
 
 ```toml
 [dependencies]
-cardano = "0.4"
+cardano = "0.5"
 ```
 
 ## Features

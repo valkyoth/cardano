@@ -2,7 +2,18 @@
 
 All notable changes to `cardano` will be documented here.
 
-## 0.4.0 - Unreleased
+## 0.5.0 - Unreleased
+
+- Added `cardano-valkyoth-cbor::DecodeBudget` for explicit untrusted
+  byte-decoding resource ceilings.
+- Added `DecodeBudgetTracker` for stateful input, nesting, item, map-entry,
+  allocation, and decoded-value accounting.
+- Added fail-closed decode-budget resource errors with stable codes, messages,
+  categories, and non-secret diagnostic counters.
+- Re-exported the CBOR budget model through the `cardano` facade crate.
+- Added the explicit `scripts/release_0_5_gate.sh` milestone gate.
+
+## 0.4.0 - 2026-07-08
 
 - Added a stable Cardano error taxonomy with categories for primitive, codec,
   address, ledger, script, governance, feature, resource, source-lock, and

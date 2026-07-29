@@ -7,6 +7,7 @@
 //! - <https://github.com/valkyoth/cardano>
 //! - <https://github.com/valkyoth/cardano/blob/main/docs/RELEASE_PLAN.md>
 
+pub use cardano_valkyoth_cbor as cbor;
 pub use cardano_valkyoth_primitives as primitives;
 
 /// Stable Cardano error model re-exported by the facade crate.

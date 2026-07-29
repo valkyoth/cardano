@@ -28,6 +28,7 @@ for package in \
     cardano; do
     if [ "$package" = "cardano" ]; then
         cargo package -p "$package" --allow-dirty \
+            --config 'patch.crates-io.cardano-valkyoth-cbor.path="crates/cardano-valkyoth-cbor"' \
             --config 'patch.crates-io.cardano-valkyoth-primitives.path="crates/cardano-valkyoth-primitives"'
     else
         cargo package -p "$package" --allow-dirty
